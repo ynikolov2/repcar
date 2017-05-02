@@ -9,9 +9,6 @@ import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
-/**
- * @author <a href="mailto:imishev@repcarpro.com">Ivan Mishev</a>
- */
 public class TransactionalTokenStore extends JdbcTokenStore {
     public TransactionalTokenStore(DataSource dataSource) {
         super(dataSource);

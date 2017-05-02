@@ -13,10 +13,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.config.server.EnableConfigServer;
 
 /**
- * Configuration service for WeeShop project.
- *
- * @author <a href="tslavkov@repcarpro.com>Tihomir Slavkov</a>
- * @author <a href="mailto:imishev@repcarpro.com">Ivan Mishev</a>
+ * Configuration service for repCar project.
  *
  */
 @SpringBootApplication
@@ -25,7 +22,7 @@ import org.springframework.cloud.config.server.EnableConfigServer;
 public class Application extends SpringBootServletInitializer  {
 
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
-//Test without merge
+
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
         return builder.sources(Application.class);

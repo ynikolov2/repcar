@@ -26,10 +26,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.repcar.security.hateoas.CustomResponse;
 
-/**
- * @author <a href="mailto:imishev@repcarpro.com">Ivan Mishev</a>
- *
- */
 
 @RestController
 public class UserController {
