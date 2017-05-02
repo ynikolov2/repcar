@@ -1,0 +1,52 @@
+<h2 layout="row" layout-align="center center">Import Users</h2>
+<br>
+<md-content class="md-no-momentum assignUserDlg" style="width:800px">
+    <div class="migrateUserDlgContainer">
+        <md-card>
+            <form name="migrateUsersForm">
+                <div layout="row" layout-align="center center">
+                    <md-input-container class="md-icon-float md-block migrateInput">
+                        <md-select name="provider" placeholder="Provider" ng-model="migrateUsersData.selectedProvider"
+                                   ng-change="loadCustomers(migrateUsersData.selectedProvider)" md-on-open="loadProviders()" required="">
+                            <md-option ng-value="provider" ng-repeat="provider in providers">
+                                {{provider}}
+                            </md-option>
+                        </md-select>
+                        <div ng-messages="createHuntGroupForm.pilotNumber.$error">
+                            <div ng-message="required">Provider is required.</div>
+                        </div>
+                    </md-input-container>
+                </div>
+                <div layout="row" layout-align="center center">
+                    <md-input-container class="md-icon-float md-block migrateInput">
+                        <md-select name="customer" placeholder="Customer" ng-model="migrateUsersData.selectedCustomer"
+                                   ng-change="loadLocations(migrateUsersData.selectedCustomer)">
+                            <md-option ng-value="customer" ng-repeat="customer in customers">
+                                {{customer.customerName}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+                <div layout="row" layout-align="center center">
+                    <md-input-container class="md-icon-float md-block migrateInput">
+                        <md-select name="location" placeholder="Location" ng-model="migrateUsersData.selectedLocation">
+                            <md-option ng-value="location" ng-repeat="location in locations">
+                                {{location.locationName}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+                <div layout="row" layout-align="center center">
+                    <md-button aria-label="Cancel" class="md-raised" ng-click="cancel()" flex="" flex-md="100">
+                        Cancel
+                    </md-button>
+                    <md-button aria-label="Save" class="md-primary md-raised" ng-click="answer(migrateUsersData)" flex=""
+                               flex-md="100" ng-disabled="!migrateUsersForm.$valid">
+                        Import Users
+                    </md-button>
+                </div>
+            </form>
+        </md-card>
+    </div>
+
+</md-content>

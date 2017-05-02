@@ -1,0 +1,44 @@
+<h2 layout="row" layout-align="center center">Create Organization</h2>
+<br>
+<md-content class="md-no-momentum createDlg">
+    <form name="createOrganizationForm">
+        <div layout="row">
+            <div>
+                <img src="images/icons/ic_person_black_24dp_1x.png" />
+            </div>
+            <div>
+                <md-input-container class="md-icon-float md-block">
+                    <label>Organization Name</label>
+                    <input name="name" ng-model="organization.name" type="text" required
+                           maxlength="50"
+                           minlength="2" ng-pattern="/[^\s]/">
+                    <div ng-messages="createOrganizationForm.name.$error">
+                        <div ng-message="required">Name is required.</div>
+                        <div ng-message="minlength">The name has to be more than 2 characters long.</div>
+                        <div ng-message="pattern">The name cannot be white spaces.</div>
+                    </div>
+                </md-input-container>
+            </div>
+        </div>
+        <div layout="row">
+            <div>
+                <img src="images/icons/ic_person_black_24dp_1x.png" />
+            </div>
+            <div>
+                <md-input-container class="md-icon-float md-block">
+                    <label>Description</label>
+                    <input ng-model="organization.description" type="text" maxlength="255">
+                </md-input-container>
+            </div>
+        </div>
+        <div layout="row" layout-align="center center">
+            <md-button aria-label="Cancel" class="md-raised" ng-click="cancel()" flex="" flex-md="100">
+                Cancel
+            </md-button>
+            <md-button aria-label="Save" class="md-primary md-raised" ng-disabled="!createOrganizationForm.$valid"
+                       ng-click="answer(organization)" flex="" flex-md="100">
+                Save
+            </md-button>
+        </div>
+    </form>
+</md-content>

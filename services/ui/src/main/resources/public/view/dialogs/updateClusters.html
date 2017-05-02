@@ -1,0 +1,37 @@
+<h2 layout="row" layout-align="center center">Added Clusters</h2>
+<br>
+<md-content class="md-no-momentum clusterDlg">
+<div layout="row">
+	<md-table-container>
+	<table md-table md-progress="promise">
+		<thead md-head>
+			<tr md-row>
+				<th md-column id="presenceClusterName"><span>Cups Cluster Name</span></th>
+				<th md-column id="cupsIp"><span>Cups Ip</span></th>
+				<th md-column id="cucmClusterName"><span>Cucm Cluster Name</span></th>
+				<th md-column id="cucmIp"><span>Cucm Ip</span></th>
+				<th md-column id="providerName"><span>Provider Name</span></th>
+				<th md-column id="callProcessingId"><span>Call Processing Id</span></th>
+			</tr>
+		</thead>
+		<tbody md-body>
+			<tr md-row md-select="cluster" md-on-select="logItem" md-auto-select="options.autoSelect"
+				ng-repeat="cluster in clusters | orderBy:'presenceClusterName'">
+				<td md-cell>{{cluster.presenceClusterName}}</td>
+				<td md-cell><md-input-container class="md-icon-float md-block editInputField"> <input
+						ng-model="cluster.cupsIp" type="text" /> </md-input-container></td>
+				<td md-cell>{{cluster.cucmClusterName}}</td>
+				<td md-cell><md-input-container class="md-icon-float md-block editInputField"> <input
+						ng-model="cluster.cucmIp" type="text" /> </md-input-container></td>
+				<td md-cell>{{cluster.providerName}}</td>
+				<td md-cell>{{cluster.callProcessingId}}</td>
+			</tr>
+		</tbody>
+	</table>
+	</md-table-container>
+</div>
+<div layout="row" layout-align="center center">
+	<md-button aria-label="Cancel" class="md-raised" ng-click="cancel()" flex="" flex-md="100"> Close </md-button>
+	<md-button aria-label="Update" class="md-primary md-raised" ng-click="answer(clusters)" flex="" flex-md="100"> Update </md-button>
+</div>
+</md-content>

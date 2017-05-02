@@ -1,0 +1,116 @@
+<h2 layout="row" layout-align="center center">Create User</h2>
+<br>
+<md-content class="md-no-momentum createDlg">
+    <form name="createUserForm" autocomplete="off">
+        <div layout="row">
+            <div>
+                <img src="images/icons/ic_person_black_24dp_1x.png" />
+            </div>
+            <div>
+                <md-input-container class="md-icon-float md-block">
+                    <label>First Name</label>
+                    <input ng-model="user.firstName" type="text" ng-required="true">
+                </md-input-container>
+            </div>
+        </div>
+        <div layout="row">
+            <div>
+                <img src="images/icons/ic_person_black_24dp_1x.png" />
+            </div>
+            <div>
+                <md-input-container class="md-icon-float md-block">
+                    <label>Last Name</label>
+                    <input ng-model="user.lastName" type="text" ng-required="true">
+                </md-input-container>
+            </div>
+        </div>
+        <div layout="row">
+            <div>
+                <img src="images/icons/ic_person_black_24dp_1x.png" />
+            </div>
+            <div>
+                <md-input-container class="md-icon-float md-block">
+                    <label>Username</label>
+                    <input ng-model="user.username" type="text" ng-required="true">
+                </md-input-container>
+            </div>
+        </div>
+        <div layout="row">
+            <div>
+                <img src="images/icons/ic_mail_outline_black_24dp_1x.png" />
+            </div>
+            <div>
+                <md-input-container class="md-icon-float md-block">
+                    <label>E-mail</label>
+                    <input ng-model="user.uri" type="text" ng-required="true">
+                </md-input-container>
+            </div>
+        </div>
+        <div layout="row">
+            <div>
+                <img src="images/icons/ic_person_black_24dp_1x.png" />
+            </div>
+            <div>
+                <md-input-container class="md-icon-float md-block">
+                    <label>Password</label>
+                    <input name="newPassword" ng-model="user.password" type="password" required="" maxlength="50"
+                           minlength="8" ng-pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&_])[A-Za-z\d$@$!%*?&_]{8,50}/">
+                    <md-tooltip md-direction="top">
+                        Spacial Characters allowed: !@%$&_*
+                    </md-tooltip>
+                    <div ng-messages="createUserForm.newPassword.$error">
+                        <div ng-message="required">Password is required.</div>
+                        <div ng-message="minlength">The password has to be more than 8 characters long.</div>
+                        <div ng-message="pattern">Password should contain at least 1 capital letter, 1 small letter, 1 number and 1 special character.</div>
+                    </div>
+                </md-input-container>
+            </div>
+        </div>
+        <div layout="row">
+            <div>
+                <img src="images/icons/ic_local_phone_black_24dp_1x.png" />
+            </div>
+            <div>
+                <md-input-container class="md-icon-float md-block">
+                    <label>Directory Number</label>
+                    <input ng-model="user.deviceNumber" type="text" ng-required="true">
+                    <md-tooltip>Must be full E.164 format without the + i.e. 441234567890</md-tooltip>
+                </md-input-container>
+            </div>
+        </div>
+        <div layout="row">
+            <div>
+                <img src="images/icons/ic_warning_black_24dp_1x.png" />
+            </div>
+            <div>
+                <md-input-container class="md-icon-float md-block">
+                    <label>Provider Name</label>
+                     <md-select ng-model="user.providerName" ng-change="changedProviderName()" >
+                         <md-option ng-value="providerName" ng-repeat="providerName in providers">{{ providerName }}</md-option>
+                     </md-select>
+                </md-input-container>
+            </div>
+        </div>
+        <div layout="row">
+            <div>
+                <img src="images/icons/ic_warning_black_24dp_1x.png" />
+            </div>
+            <div>
+                <md-input-container class="md-icon-float md-block">
+                    <label>Call Processing Id</label>
+                    <md-select ng-model="user.callProcessingId" >
+                        <md-option ng-value="cluster" ng-repeat="cluster in clusters">{{ cluster}}</md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+        </div>
+        <div layout="row" layout-align="end center">
+            <md-button aria-label="Cancel" class="md-raised" ng-click="cancel()" flex="" flex-md="100">
+                Cancel
+            </md-button>
+            <md-button aria-label="Save" ng-disabled="!createUserForm.$valid" class="md-primary md-raised" ng-click="answer(user)" flex="" flex-md="100">
+                Save
+            </md-button>
+        </div>
+    </form>
+</md-content>

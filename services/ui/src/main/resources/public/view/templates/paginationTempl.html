@@ -1,0 +1,44 @@
+<div class="pagination">
+    <div class="page-select">
+        <div class="label">Page:</div>
+
+        <md-select virtual-page-select total="3" class="md-table-select" ng-model="currentPage"
+                   md-container-class="md-pagination-select" ng-change="onPaginationChange(currentPage)"
+                   aria-label="Page">
+            <md-content>
+                <md-option ng-repeat="page in pages track by $index" ng-value="page" ng-selected="currentPage == page">
+                    <div class="md-text-custom-margin">{{page}}</div>
+                </md-option>
+            </md-content>
+        </md-select>
+    </div>
+    <div class="limit-select">
+        <div class="label">Rows per Page: {{paginationOptions.pageSize}}</div>
+
+        <md-select class="md-table-select" ng-model="paginationOptions.pageSize"
+                   ng-change="toggleLimitOptions(paginationOptions.pageSize)" md-container-class="md-pagination-select"
+                   aria-label="Rows">
+            <md-option ng-repeat="limit in limitOptions" ng-selected="paginationOptions.pageSize == limit">
+                <div class="md-text-custom-margin">{{limit}}</div>
+            </md-option>
+        </md-select>
+    </div>
+    <div class="label">{{firstWatchingElement}}-{{lastWatchingElement}} of {{paginationOptions.totalElements}}</div>
+    <div class="buttons">
+        <md-button class="md-icon-button" type="button" ng-model="navigationButtons.first" ng-disabled="navigationButtons.first.length == 0 || navigationButtons.first.length == undefined" ng-click="navigateTo('first', navigationButtons.first)" aria-label="First">
+            <md-icon md-svg-icon="navigate-first.svg"></md-icon>
+        </md-button>
+
+        <md-button class="md-icon-button" type="button" ng-model="navigationButtons.prev" ng-disabled="navigationButtons.prev.length == 0 || navigationButtons.prev.length == undefined" ng-click="navigateTo('prev', navigationButtons.prev)" aria-label="Previous">
+            <md-icon md-svg-icon="navigate-before.svg"></md-icon>
+        </md-button>
+
+        <md-button class="md-icon-button" type="button" ng-model="navigationButtons.next" ng-disabled="navigationButtons.next.length == 0 || navigationButtons.next.length == undefined" ng-click="navigateTo('next', navigationButtons.next)" aria-label="Next">
+            <md-icon md-svg-icon="navigate-next.svg"></md-icon>
+        </md-button>
+
+        <md-button class="md-icon-button" type="button" ng-model="navigationButtons.last" ng-disabled="navigationButtons.last.length == 0 || navigationButtons.last.length == undefined" ng-click="navigateTo('last', navigationButtons.last)" aria-label="Last">
+            <md-icon md-svg-icon="navigate-last.svg"></md-icon>
+        </md-button>
+    </div>
+</div>

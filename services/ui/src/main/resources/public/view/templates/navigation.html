@@ -1,0 +1,123 @@
+<md-sidenav class="md-sidenav-left md-whiteframe-z2"
+            md-component-id="left">
+    <md-toolbar layout="row">
+        <div class="md-toolbar-tools">
+            <h2>
+                <span>Side Panel</span>
+            </h2>
+            <span flex></span>
+            <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="closeSideNavPanel()">
+                <md-tooltip>Close Side Panel</md-tooltip>
+                <md-icon class="md-default-theme" class="material-icons">&#xE5CD;</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-content layout-padding="">
+        <md-list>
+            <md-subheader ng-show="isSuperAdmin()" class="md-no-sticky">Organizations</md-subheader>
+            <md-divider></md-divider>
+            <md-list-item ng-show="isSuperAdmin()" ng-click="go('organizations')">
+                <img src="images/icons/ic_group_work_black_24dp_1x.png" />
+                <p>Organizations</p>
+            </md-list-item>
+        </md-list>
+    </md-content>
+</md-sidenav>
+
+<md-toolbar class="desktop">
+    <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" aria-label="Side Panel" ng-click="openSideNavPanel()">
+            <md-tooltip>Side Panel</md-tooltip>
+            <img src="images/icons/ic_reorder_white_24dp_1x.png" />
+        </md-button>
+        <img src="images/logo.png" />
+        <span flex="5"></span>
+        <h2>
+           <span>RepCar Car Workshop Service Manager</span>
+        </h2>
+        <span flex></span>
+        Welcome: {{userDetails.firstName}} {{userDetails.lastName}}
+        <md-menu md-offset="0 -7">
+            <md-button aria-label="Open demo menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+                <img src="images/icons/ic_account_circle_white_24dp_1x.png" />
+            </md-button>
+            <md-menu-content width="4">
+                <md-menu-item ng-repeat="item in items()">
+                    <md-button ng-click="announceClick(item)"><span md-menu-align-target="">{{item}}</span> 
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+    </div>
+</md-toolbar>
+<md-toolbar class="tablet">
+    <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" aria-label="Side Panel" ng-click="openSideNavPanel()">
+            <md-tooltip>Open Side Panel</md-tooltip>
+            <md-icon class="md-default-theme" class="material-icons">&#xE5D2;</md-icon>
+        </md-button>
+        Welcome: {{userDetails.firstName}} {{userDetails.lastName}}
+        <md-button class="md-icon-button" aria-label="Icon">
+            <md-tooltip>User</md-tooltip>
+            <img src="images/icons/ic_account_circle_white_24dp_1x.png" />
+        </md-button>
+        <h2>
+            <span>RepCar Car Workshop Service Manager</span>
+        </h2>
+        <span flex></span>
+        <md-menu md-offset="0 -7">
+            <md-button aria-label="Open menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+                <md-icon md-menu-origin="" md-svg-icon="call:email"></md-icon>
+            </md-button>
+            <md-menu-content width="4">
+                <md-menu-item ng-repeat="item in [1, 2, 3]">
+                    <md-button ng-click="ctrl.announceClick($index)"><span md-menu-align-target="">Option</span>
+                        {{item}}
+                    </md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+    </div>
+</md-toolbar>
+<md-toolbar class="mobile">
+    <div class="md-toolbar-tools" data-ng-show="showMobileMainHeader">
+        <md-button class="md-icon-button" aria-label="Side Panel" ng-click="openSideNavPanel()">
+            <md-tooltip>Open Side Panel</md-tooltip>
+            <md-icon class="md-default-theme" class="material-icons">&#xE5D2;</md-icon>
+        </md-button>
+        <md-button class="md-icon-button" aria-label="Icon">
+            <md-tooltip>Icon</md-tooltip>
+            <img src="images/icons/ic_account_circle_white_24dp_1x.png" />
+        </md-button>
+        <h2>
+            <span>RepCar Car Workshop Service Manager</span>
+        </h2>
+        <span flex></span>
+        <md-button class="md-icon-button" aria-label="Search" data-ng-click="showMobileMainHeader = false">
+            <md-tooltip>Search</md-tooltip>
+            <md-icon class="material-icons">&#xE8B6;</md-icon>
+        </md-button>
+        <md-button class="md-icon-button" aria-label="User">
+            <md-tooltip>User</md-tooltip>
+            <img src="images/icons/ic_account_circle_white_24dp_1x.png" />
+        </md-button>
+        <md-button class="md-icon-button" aria-label="Messages">
+            <md-tooltip>Messages</md-tooltip>
+            <i class="material-icons">message</i>
+        </md-button>
+    </div>
+    <div class="md-toolbar-tools" data-ng-hide="showMobileMainHeader">
+        <md-button class="md-icon-button" aria-label="Back" data-ng-click="showMobileMainHeader = true">
+            <md-tooltip>Back</md-tooltip>
+            <md-icon class="material-icons">&#xE5C4;</md-icon>
+        </md-button>
+        <span flex></span>
+        <md-button class="md-icon-button" aria-label="Search">
+            <md-tooltip>Search</md-tooltip>
+            <md-icon class="material-icons">&#xE163;</md-icon>
+        </md-button>
+    </div>
+</md-toolbar>
+<div id="divLoading" ng-show="showLoadingGif" class="show">
+    <md-progress-circular id="loadingSpinner" md-diameter="96"></md-progress-circular>
+</div>

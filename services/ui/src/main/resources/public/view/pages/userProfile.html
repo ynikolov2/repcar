@@ -1,0 +1,101 @@
+<md-content laout="column" flex>
+    <h1 layout="row" layout-align="center center">
+        {{user.firstName}} {{user.lastName}}
+    </h1>
+
+    <form name="userForm" autocomplete="off">
+        <div layout="row" layout-align="center center">
+            <md-input-container class="md-icon-float md-block editInputField">
+                <!-- Use floating label instead of placeholder -->
+                <label>First Name</label>
+                <input name="name" ng-model="user.firstName" type="text" ng-change="userChange()">
+            </md-input-container>
+        </div>
+        <div layout="row" layout-align="center center">
+            <md-input-container class="md-icon-float md-block editInputField">
+                <!-- Use floating label instead of placeholder -->
+                <label>Last Name</label>
+                <input ng-model="user.lastName" type="text" ng-change="userChange()">
+            </md-input-container>
+        </div>
+        <div layout="row" layout-align="center center">
+            <md-input-container class="md-icon-float md-block editInputField">
+                <!-- Use floating label instead of placeholder -->
+                <label>Username</label>
+                <input ng-model="user.username" type="text" ng-change="userChange()">
+            </md-input-container>
+        </div>
+        <div layout="row" layout-align="center center">
+            <md-input-container class="md-icon-float md-block editInputField">
+                <!-- Use floating label instead of placeholder -->
+                <label>Password</label>
+                <input name="newPassword" ng-model="newPassword" type="password" maxlength="50" ng-change="userChange()"
+                       minlength="8" ng-pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&_])[A-Za-z\d$@$!%*?&_]{8,50}/">
+                <md-tooltip md-direction="top">
+                    Spacial Characters allowed: !@%$&_*
+                </md-tooltip>
+                <div ng-messages="userForm.newPassword.$error">
+                    <div ng-message="required">Password is required.</div>
+                    <div ng-message="minlength">The password has to be more than 8 characters long.</div>
+                    <div ng-message="pattern">Password should contain at least 1 capital letter, 1 small letter, 1 number and 1 special character.</div>
+                </div>
+            </md-input-container>
+        </div>
+        <div layout="column" layout-align="center center">
+            <div layout="column" layout-align="center" >
+                <md-checkbox ng-model="user.forcePasswordChange" class="md-warn md-align-top-left" flex ng-change="userChange()">
+                    Force password change on next login.
+                </md-checkbox>
+            </div>
+        </div>
+        <div layout="row" layout-align="center center">
+            <md-input-container class="md-icon-float md-block editInputField">
+                <!-- Use floating label instead of placeholder -->
+                <label>Directory Number</label>
+                <input ng-model="user.deviceNumber" type="text" ng-change="userChange()">
+                <md-tooltip>Must be full E.164 format without the + i.e. 441234567890</md-tooltip>
+            </md-input-container>
+        </div>
+        <div layout="row" layout-align="center center">
+            <md-input-container class="md-icon-float md-block editInputField">
+                <label>Email</label>
+                <input ng-model="user.uri" type="text" readonly="true">
+            </md-input-container>
+        </div>
+        <div layout="row" layout-align="center center">
+            <md-input-container class="md-icon-float md-block editInputField">
+                <label>Provider Name</label>
+                <md-select ng-model="user.providerName" ng-change="changedProviderName(); userChange();" >
+                    <md-option ng-value="providerName" ng-repeat="providerName in providers">{{ providerName }}</md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+        <div layout="row" layout-align="center center">
+            <md-input-container class="md-icon-float md-block editInputField">
+                <label>Call Processing Id</label>
+                <md-select ng-model="user.callProcessingId"  ng-change="userChange()">
+                   <md-option ng-value="cluster" ng-repeat="cluster in clusters">{{ cluster}}</md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+        <div layout="column" layout-align="center center" >
+            <div layout="column" layout-align="center" >
+                <div ng-repeat="role in roles">
+                    <label flex></label>
+                    <md-checkbox ng-model="role.flag" class="md-warn md-align-top-left" flex ng-change="userChange()">
+                        {{role.name}}
+                    </md-checkbox>
+                </div>
+            </div>
+        </div>
+        <div layout="row" layout-align="center center">
+            <md-button aria-label="Cancel" class="md-raised" ng-click="loadUser(user.userId)" ng-disabled="buttonsDisabled" >
+                Cancel
+            </md-button>
+            <md-button aria-label="Save" class="md-primary md-raised" ng-click="save($event)" ng-disabled="buttonsDisabled || !userForm.$valid" >
+                Save
+            </md-button>
+        </div>
+
+    </form>
+</md-content>

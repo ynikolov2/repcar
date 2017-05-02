@@ -1,0 +1,77 @@
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="x-ua-compatible" content="IE=11">
+
+    <link rel="stylesheet" href="css/third-party/angular-material.min.css"/>
+    <link href="css/third-party/icon.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/third-party/md-data-table.css">
+    <link rel="stylesheet" href="css/third-party/mdPickers.min.css">
+    <link rel="stylesheet" href="css/main.css"/>
+
+  <title>RepCar</title>
+
+<style type="text/css">
+/** Hide when Angular is not yet loaded and initialized */
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak,
+	.x-ng-cloak {
+	display: none !important;
+}
+</style>
+
+</head>
+
+<body ng-app="app" layout="column" ng-controller="mainCtrl" md-theme="{{activeTheme}}" ng-cloak>
+
+    <div ng-show="loggedIn" ng-include="'view/templates/navigation.html'"></div>
+    <div ng-show="loggedIn" ncy-breadcrumb></div>
+	<div flex layout="row" style="overflow: auto;" >
+
+	  <md-content flex id="content" ng-class="{mainContainerHeight: loggedIn}">
+	    <div layout="column" layout-fill ui-view id="mainView"></div>
+	  </md-content>
+
+	</div>
+
+<script type="text/javascript" src="js/third-party/angular.js"></script>
+<script type="text/javascript" src="js/third-party/angular-animate.min.js"></script>
+<script type="text/javascript" src="js/third-party/angular-ui-router.js"></script>
+<script	type="text/javascript" src="js/third-party/angular-resource.js"></script>
+<script type="text/javascript" src="js/third-party/ngStorage.min.js"></script>
+<script type="text/javascript" src="js/third-party/angular-aria.min.js"></script>
+<script type="text/javascript" src="js/third-party/angular-messages.min.js"></script>
+<script type="text/javascript" src="js/third-party/angular-material.min.js"></script>
+<script type="text/javascript" src="js/third-party/assets-cache.js"></script>
+<script type="text/javascript" src="js/third-party/md-data-table.js"></script>
+<script type="text/javascript" src="js/third-party/angular-breadcrumb.js"></script>
+<script type="text/javascript" src="js/third-party/angular-idle.js"></script>
+<script type="text/javascript" src="js/third-party/moment.js"></script>
+<script type="text/javascript" src="js/third-party/ng-csv.min.js"></script>
+<script type="text/javascript" src="js/third-party/angular-sanitize.min.js"></script>
+<script src="js/third-party/moment.js" type="text/javascript"></script>
+<script type="text/javascript" src='js/third-party/mdPickers.js'></script>
+<script type="text/javascript" src='js/third-party/angular-file-upload.js'></script>
+<script type="text/javascript" src='js/third-party/angular-cookies.js'></script>
+<!--Controller and Services here-->
+
+<script src="js/app.js" type="text/javascript"></script>
+<script src="js/controllers/loginCtrl.js" type="text/javascript"></script>
+<script src="js/controllers/mainCtrl.js" type="text/javascript"></script>
+<script src="js/controllers/homeCtrl.js" type="text/javascript"></script>
+<script src="js/controllers/userProfileCtrl.js" type="text/javascript"></script>
+<script src="js/directives/paginationDir.js" type="text/javascript"></script>
+<script src="js/directives/inputClear.js" type="text/javascript"></script>
+<script src="js/directives/fileReader.js" type="text/javascript"></script>
+<script src="js/interceptors/authInterceptor.js" type="text/javascript"></script>
+<script src="js/services/generalService.js" type="text/javascript"></script>
+<script src="js/services/orderService.js" type="text/javascript"></script>
+<script src="js/services/userService.js" type="text/javascript"></script>
+<script src="js/services/authService.js" type="text/javascript"></script>
+<script src="js/third-party/angular-breadcrumb.js" type="text/javascript"></script>
+
+
+
+</body>
+</html>
+
+

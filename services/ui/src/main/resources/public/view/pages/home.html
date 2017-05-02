@@ -1,0 +1,89 @@
+<md-content laout="column" flex>
+    <md-card>
+        <md-toolbar class="md-table-toolbar md-default" ng-hide="options.rowSelection && selected.length">
+            <div class="md-toolbar-tools">
+                <span>Organizations</span>
+
+                <div flex></div>
+                <form name="searchForm">
+                    <div layout="row" layout-align="none none">
+                        <md-input-container md-no-float="" class="md-block search">
+                            <input id="search" name="search" ng-model="searchField" placeholder="Search" md-maxlength="50" minlength="3">
+                            <div ng-messages="searchForm.search.$error" role="alert" multiple="">
+                                <div ng-message="minlength">
+                                    Enter at least 3 characters for search
+                                </div>
+                            </div>
+                        </md-input-container>
+                        {{searchField.length }}$
+                        <md-button  class="md-icon-button clearIcon" ng-click="clearSearch()" ng-disabled="searchField.length == 0">
+                            <img ng-if="searchField.length != 0" src="images/icons/clear.png" />
+                            <img ng-if="searchField.length == 0" src="images/icons/clear_grey.png" />
+                        </md-button>
+                        <md-button  id="searchBtn" type="submit" aria-label="Refresh" class="md-icon-button" ng-click="search()" >
+                            <img ng-if="searchForm.$valid" src="images/icons/ic_search_black_24dp_1x.png" />
+                            <img ng-if="!searchForm.$valid" src="images/icons/search_grey.png" />
+                        </md-button>
+                    </div>
+                </form>
+                <md-button aria-label="Create Organization" class="md-primary md-raised"
+                           ng-click="showCreateOrganizationDialog($event)">
+                    Create Organization
+                </md-button>
+                <md-button aria-label="Refresh" class="md-icon-button" ng-click="loadStuff()">
+                    <img src="images/icons/ic_autorenew_black_24dp_1x.png" />
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-toolbar class="md-table-toolbar alternate" ng-show="options.rowSelection && selected.length">
+            <div class="md-toolbar-tools">
+                <span>{{selected.length}} {{selected.length > 1 ? 'items' : 'item'}} selected</span>
+            </div>
+        </md-toolbar>
+        <md-table-container>
+            <table md-table md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" ng-model="selected"
+                   md-progress="promise">
+                <thead ng-if="!options.decapitate" md-head md-order="query.order" md-on-reorder="logOrder">
+                <tr md-row>
+                    <th md-column><span>View Organization</span></th>
+                    <th md-column id="orgName" md-order-by="orgName" ng-click="orderOrganizations('orgName','name')"><span>Organization Name</span></th>
+                    <th md-column id="orgFallBackNumber" md-order-by="orgFallBackNumber" ng-click="orderOrganizations('orgFallBackNumber','fallBackNumber')"><span>Fall Back Number</span></th>
+                    <th md-column id="organizationEnable" md-order-by="organizationEnable"
+                        ng-click="orderOrganizations('organizationEnable','enable')"><span>Enabled</span>
+                    </th>
+                    <th md-column></th>
+                </tr>
+                </thead>
+                <tbody md-body>
+                <tr md-row md-select="user" md-on-select="logItem" md-auto-select="options.autoSelect"
+                    ng-repeat="organization in organizations">
+                    <td md-cell ui-sref="editOrganizationProfile({organizationId:organization.orgId})"
+                        ng-click="dummy()"><img src="images/icons/ic_group_work_black_24dp_1x.png" /></td>
+                    <td md-cell ui-sref="editOrganizationProfile({organizationId:organization.orgId})"
+                        ng-click="dummy()">{{organization.name}}
+                    </td>
+                    <td md-cell ui-sref="editOrganizationProfile({organizationId:organization.orgId})"
+                        ng-click="dummy()">{{organization.fallBackNumber}}
+                    </td>
+                    <td md-cell
+                        ui-sref="editOrganizationProfile({organizationId:organization.orgId})"
+                        ng-click="dummy()">
+                        <img ng-if="organization.enable" src="images/icons/ic_check_box_green_24dp_1x.png" />
+                        <img ng-if="!organization.enable" src="images/icons/ic_clear_red_24dp_1x.png" />
+                    </td>
+                    <td md-cell>
+                        <div layout="row" layout-align="start center" flex>
+                            <span flex></span>
+                            <md-button aria-label="Delete Organization" class="md-icon-button"
+                                       ng-click="showConfirmDeleteOrganization($event, organization)">
+                                <img src="images/icons/ic_delete_black_24dp_1x.png" />
+                            </md-button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </md-table-container>
+        <pagination pagination-options="pageOrderOptions" navigation-buttons="navigationButtons" paginate="paginateOrganizations(options, pagedObject)"></pagination>
+    </md-card>
+</md-content>

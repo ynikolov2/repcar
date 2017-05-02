@@ -1,0 +1,66 @@
+<h2 layout="row" layout-align="center center">Assign Members</h2>
+<br>
+<md-content class="md-no-momentum assignUserDlg" style="width:800px">
+    <div class="assignUserDlgContainer">
+       <md-card>
+	        <md-toolbar class="md-table-toolbar alternate">
+				<div layout="row">
+					<div class="md-toolbar-tools">
+						<span>{{selected.length}} {{selected.length > 1 ? 'items' : 'item'}} selected</span>
+					</div>
+					<div layout="row" layout-align="end start">
+						<form name="hgUsersSearchForm" class="assignUserSearchForm">
+							<div layout="row" layout-align="none none">
+								<md-input-container md-no-float="" class="md-block">
+									<input name="hgUsersSearch" class="assignUserSearchInput" ng-model="orgUsersSearchField" placeholder="Search" md-maxlength="50" minlength="3">
+									<div ng-messages="hgUsersSearchForm.hgUsersSearch.$error" role="alert" multiple="">
+										<div ng-message="minlength">
+											Enter at least 3 characters for search
+										</div>
+									</div>
+								</md-input-container>
+								<md-button  class="md-icon-button assignUserSearchButton" ng-click="orgUsersClearSearch()" ng-disabled="orgUsersSearchField.length == 0">
+									<img ng-if="hgUsersSearchForm.$valid" src="images/icons/clear.png" />
+									<img ng-if="!hgUsersSearchForm.$valid" src="images/icons/clear_grey.png" />
+								</md-button>
+								<md-button type="submit" aria-label="Refresh" class="md-icon-button assignUserSearchButton" ng-click="hgUsersSearch()" ng-disabled="!hgUsersSearchForm.$valid || orgUsersSearchField.length == 0">
+									<img ng-if="hgUsersSearchForm.$valid" src="images/icons/ic_search_black_24dp_1x.png" />
+									<img ng-if="!hgUsersSearchForm.$valid" src="images/icons/search_grey.png" />
+								</md-button>
+							</div>
+						</form>
+					</div>
+				</div>
+	        </md-toolbar>
+	        <md-table-container>
+	            <table md-table md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" ng-model="selected" md-progress="promise">
+	                <thead ng-if="!options.decapitate" md-head md-order="query.order" md-on-reorder="logOrder">
+	                <tr md-row>
+	                    <th md-column id="orgUserUsername" md-order-by="orgUserUsername" ng-click="orderOrganizationUsers('orgUserUsername', 'username')"><span>Username</span></th>
+	                    <th md-column id="orgUserFirstName" md-order-by="orgUserFirstName" ng-click="orderOrganizationUsers('orgUserFirstName', 'firstName')"><span>First Name</span></th>
+	                    <th md-column id="orgUserLastName" md-order-by="orgUserLastName" ng-click="orderOrganizationUsers('orgUserLastName', 'lastName')"><span>Last Name</span></th>
+						<th md-column id="userDeviceNumber" md-order-by="userDeviceNumber" ng-click="orderOrganizationUsers('userDeviceNumber', 'deviceNumber')"><span>Directory Number</span></th>
+	                </tr>
+	                </thead>
+	                <tbody md-body>
+	                <tr md-row md-select="user" md-on-select="logItem" md-auto-select="options.autoSelect"  ng-repeat="user in users">
+	                    <td md-cell>{{user.username}}</td>
+	                    <td md-cell>{{user.firstName}}</td>
+	                    <td md-cell>{{user.lastName}}</td>
+						<td md-cell>{{user.deviceNumber}}</td>
+	                </tr>
+	                </tbody>
+	            </table>
+	        </md-table-container>
+		   <pagination pagination-options="orgUserPageOrderOptions" navigation-buttons="orgUserNavigationButtons" paginate="paginateOrganizationUsers(options, pagedObject)"></pagination>
+	    </md-card>
+        </div>
+    <div layout="row" layout-align="end center">
+        <md-button aria-label="Cancel" class="md-raised" ng-click="cancel()" flex="" flex-md="100">
+            Cancel
+        </md-button>
+        <md-button aria-label="Save" class="md-primary md-raised" ng-click="answer(selected)" flex="" flex-md="100">
+			Assign
+		</md-button>
+    </div>
+</md-content>

@@ -1,0 +1,29 @@
+<div layout="column" layout-align="center center" class="login-page">
+    <div class="loginBox md-whiteframe-z1">
+        <md-toolbar>
+            <h2 class="md-toolbar-tools"><span>Login</span></h2>
+        </md-toolbar>
+        <form ng-submit="login(username, password)" autocomplete="off">
+            <md-content layout="column" class="md-padding">
+                <div style="color:red;" ng-show="error">
+                    Login failed. If the problem persists, please contact your system administrator.
+                </div>
+                <md-input-container>
+                    <label>Username:</label>
+                    <input type="text" ng-model="username"/>
+                </md-input-container>
+                <md-input-container>
+                    <label>Password:</label>
+                    <input type="password" ng-model="password"/>
+                </md-input-container>
+                <div layout="row" layout-align="center center" style="padding-top:20px;">
+                    <md-button type="submit" class="md-raised md-primary"  ng-click="login(username, password)">Login</md-button>
+                    <div flex="flex"></div>
+                </div>
+                <span class="loginNote" style="color:green;">If you have forgotten your Username or password, please contact your system administrator</span>
+            </md-content>
+        </form>
+    </div>
+</div>
+<div class="loginFooter" layout-align="center center">
+</div>

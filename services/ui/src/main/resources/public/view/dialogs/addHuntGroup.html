@@ -1,0 +1,59 @@
+<h2 layout="row" layout-align="center center">Add Hunt Group</h2>
+<br>
+<md-content class="md-no-momentum createDlg">
+    <form name="createHuntGroupForm">
+        <div layout="row">
+            <div>
+                <img src="images/icons/ic_person_black_24dp_1x.png" />
+            </div>
+            <div>
+                <md-input-container class="md-icon-float md-block">
+                    <label>Hunt Group Name</label>
+                    <input name="name" ng-model="huntGroup.name" type="text" required="" maxlength="255"
+                           minlength="2" ng-pattern="/[^\s]/">
+                    <div ng-messages="createHuntGroupForm.name.$error">
+                        <div ng-message="required">Name is required.</div>
+                        <div ng-message="minlength">The name has to be more than 2 characters long.</div>
+                        <div ng-message="pattern">The name cannot be white spaces.</div>
+                    </div>
+                </md-input-container>
+            </div>
+        </div>
+        <div layout="row">
+            <div>
+                <img src="images/icons/ic_local_phone_black_24dp_1x.png" />
+            </div>
+            <div>
+                <md-input-container class="md-icon-float md-block">
+                    <!-- Use floating label instead of placeholder -->
+                    <label>Pilot Number</label>
+                    <md-select name="pilotNumber" placeholder="Assign Pilot Number" ng-model="huntGroup.pilotNumber"
+                               ng-change="writePilotNumber()" md-on-open="loadPilotNumbers()" required="">
+                        <md-option ng-value="pilotNumber.pilotNumberId" ng-repeat="pilotNumber in pilotNumbers">
+                            {{pilotNumber.number}}
+                        </md-option>
+                    </md-select>
+                    <div ng-messages="createHuntGroupForm.pilotNumber.$error">
+                        <div ng-message="required">Pilot Number is required.</div>
+                    </div>
+                </md-input-container>
+            </div>
+        </div>
+        <div layout="row"  layout-align="center center">
+            <md-input-container class="md-icon-float md-block">
+                <md-checkbox ng-model="huntGroup.useDefaults" ng-init="huntGroup.useDefaults=true" aria-label="One Fallback number checkbox">
+                    Use Organization's Default Settings
+                </md-checkbox>
+            </md-input-container>
+        </div>
+        <div layout="row" layout-align="center center">
+            <md-button aria-label="Cancel" class="md-raised" ng-click="cancel()" flex="" flex-md="100">
+                Cancel
+            </md-button>
+            <md-button aria-label="Save" class="md-primary md-raised" ng-click="answer(huntGroup)" flex=""
+                       flex-md="100" ng-disabled="!createHuntGroupForm.$valid">
+                Save
+            </md-button>
+        </div>
+    </form>
+</md-content>
