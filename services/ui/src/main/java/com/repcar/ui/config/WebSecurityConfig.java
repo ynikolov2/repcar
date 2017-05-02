@@ -13,18 +13,14 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    // TODO Configure different view permissions for ADMIN, etc.
-    @Override
-    public void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("index.html", "/lib/**", "/view/**", "/js/**", "/info", "/collaboration/**", "/images/**",
-                        "/images/**", "/user-data/userdata", "/user-data/userdata/**", "/idmap/idMaps",
-                        "/idmap/idMaps/**", "/product/products*", "/product/products/**", "/company/companies*",
-                        "/company/companies/**", "/category/categories*", "/category/categories/**", "/security/**",
-                        "/cmx/macs/**", "/meeting/meetings", "/meeting/meetings/*", "/user/users/**",
-                        "/collaboration/jabberSettings", "/collaboration/jabberSettings/*", "/token")
-                .permitAll().anyRequest().authenticated().and().logout().logoutSuccessUrl("/").permitAll().and().csrf()
-                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
-    }
+	// TODO Configure different view permissions for ADMIN, etc.
+	@Override
+	public void configure(HttpSecurity http) throws Exception {
+		http.authorizeRequests()
+				.antMatchers("index.html", "/lib/**", "/view/**", "/js/**", "/info", "/images/**", "/images/**",
+						"/security/**", "/user/users/**",  "/token")
+				.permitAll().anyRequest().authenticated().and().logout().logoutSuccessUrl("/").permitAll().and().csrf()
+				.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+	}
 
 }

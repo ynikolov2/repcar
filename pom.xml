@@ -23,9 +23,8 @@
         <module>services/ui</module>
         <module>services/user</module>
         <module>services/api-gateway</module>
-        <module>services/job</module>
         <module>services/customer</module>
-        <module>services/viechle</module>
+        <module>services/viechle-job</module>
         <module>services/make-model-db</module>
     </modules>
     <parent>

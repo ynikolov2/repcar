@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.security.oauth2.client.OAuth2RestOperations;
 
-import com.repcar.viechle.beans.User;
-import com.repcar.viechle.beans.User.Roles;
+import com.repcar.viechlejob.beans.User;
+import com.repcar.viechlejob.beans.User.Roles;
 
 @Configuration
 @EnableSpringDataWebSupport

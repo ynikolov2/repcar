@@ -1,7 +1,7 @@
 /*
  * Copyright RepCar AD 2017
  */
-package com.repcar.makemodel.repositories;
+package com.repcar.viechlejob.repositories;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,17 +9,17 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.repcar.makemodel.beans.User_old;
+import com.repcar.viechlejob.beans.User;
 
 /**
- * Home object for domain model class User_old.
- * 
+ * Home object for domain model class User.
+ *
  */
 @Repository
 @Transactional
-public interface UserRepository extends JpaRepository<User_old, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
-    User_old findByUserName(String userName);
+    User findByUserName(String userName);
 
-    Page<User_old> findByCompanyId(Long companyId, Pageable pageable);
+    Page<User> findByCompanyId(Long companyId, Pageable pageable);
 }

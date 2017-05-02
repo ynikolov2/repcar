@@ -56,7 +56,7 @@ public class SecurityConfig extends GlobalAuthenticationConfigurerAdapter {
                     }
 
                     return new User(user.getUserName(), decryptService.decrypt(user.getUserPassword()), true, true,
-                            true, true, AuthorityUtils.createAuthorityList(user.getUserRole()));
+                            true, true, AuthorityUtils.createAuthorityList(user.getUserRole().getRoleName()));
                 } catch (Exception e) {
                     throw new UsernameNotFoundException("DBUser does not exist");
                 }

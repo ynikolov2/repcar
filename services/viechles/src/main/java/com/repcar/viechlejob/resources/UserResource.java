@@ -1,7 +1,7 @@
 /*
  * Copyright RepCar AD 2017
  */
-package com.repcar.makemodel.resources;
+package com.repcar.viechlejob.resources;
 
 import java.sql.Timestamp;
 
@@ -11,7 +11,7 @@ import org.springframework.hateoas.core.Relation;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.repcar.makemodel.beans.User_old.Roles;
+import com.repcar.viechlejob.beans.User.Roles;
 
 /**
  * @author <a href="mailto:mstancheva@repcarpro.com">Mihaela Stancheva</a>

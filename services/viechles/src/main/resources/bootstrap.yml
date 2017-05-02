@@ -1,6 +1,6 @@
 spring:
   application:
-    name: viechle
+    name: viechle-job
 
 ---
 spring:

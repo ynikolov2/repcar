@@ -1,25 +1,25 @@
 /*
  * Copyright RepCar AD 2017
  */
-package com.repcar.makemodel.assembler;
+package com.repcar.viechlejob.assembler;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Service;
 
-import com.repcar.makemodel.beans.User_old;
-import com.repcar.makemodel.controllers.UserController;
-import com.repcar.makemodel.resources.UserResource;
+import com.repcar.viechlejob.beans.User;
+import com.repcar.viechlejob.controllers.UserController;
+import com.repcar.viechlejob.resources.UserResource;
 
 @Service
-public class UserAssembler extends ResourceAssemblerSupport<User_old, UserResource> {
+public class UserAssembler extends ResourceAssemblerSupport<User, UserResource> {
 
     public UserAssembler() {
         super(UserController.class, UserResource.class);
     }
 
-    public UserResource toResource(User_old user) {
+    public UserResource toResource(User user) {
         UserResource resource = new UserResource(user.getUserId(), user.getUserName(), user.getUserEmail(),
                 user.getUserFirstName(), user.getUserLastName(), user.getUserImage(), user.getUserRole(),
                 user.getCreationDate(), user.getUserAttributes());

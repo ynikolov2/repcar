@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.security.oauth2.client.OAuth2RestOperations;
 
-import com.repcar.makemodel.beans.User;
-import com.repcar.makemodel.beans.User.Roles;
+import com.repcar.makemodel.beans.User_old;
+import com.repcar.makemodel.beans.User_old.Roles;
 
 @Configuration
 @EnableSpringDataWebSupport
@@ -19,11 +19,11 @@ public class UnitTestContext {
 
     public static final Long USER_ID = 175L;
     public static final Long COMPANY_ID = 17L;
-    public static final String USER_NAME = "Test User";
+    public static final String USER_NAME = "Test User_old";
     public static final String USER_PASSWORD = "password";
     public static final String USER_PASSWORD_ENCRYPTED = "38dc6e4faf0";
     public static final String USER_FIRST_NAME = "Test";
-    public static final String USER_LAST_NAME = "User";
+    public static final String USER_LAST_NAME = "User_old";
     public static final String USER_EMAIL = "test.user@unittests.local";
 
     @Bean(name = "clientRestTemplate")
@@ -32,8 +32,8 @@ public class UnitTestContext {
     }
 
     @Bean
-    public User newUser() {
-        User user = new User();
+    public User_old newUser() {
+        User_old user = new User_old();
         user.setUserFirstName(USER_FIRST_NAME);
         user.setUserLastName(USER_LAST_NAME);
         user.setUserEmail(USER_EMAIL);
@@ -45,8 +45,8 @@ public class UnitTestContext {
     }
 
     @Bean
-    public User persistedUser() {
-        User user = new User();
+    public User_old persistedUser() {
+        User_old user = new User_old();
         user.setUserId(USER_ID);
         user.setUserFirstName(USER_FIRST_NAME);
         user.setUserLastName(USER_LAST_NAME);
@@ -59,8 +59,8 @@ public class UnitTestContext {
     }
 
     @Bean
-    public User forUpdateUser() {
-        User user = new User();
+    public User_old forUpdateUser() {
+        User_old user = new User_old();
         user.setUserId(USER_ID);
         user.setUserFirstName(USER_FIRST_NAME);
         user.setUserLastName(USER_LAST_NAME);

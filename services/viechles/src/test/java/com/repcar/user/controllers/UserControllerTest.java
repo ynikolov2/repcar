@@ -66,12 +66,12 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.repcar.user.Util;
 import com.repcar.user.config.UnitTestContext;
-import com.repcar.viechle.assembler.UserAssembler;
-import com.repcar.viechle.beans.User;
-import com.repcar.viechle.controllers.UserController;
-import com.repcar.viechle.encryption.EncryptDecryptService;
-import com.repcar.viechle.repositories.UserRepository;
-import com.repcar.viechle.resources.UserResource;
+import com.repcar.viechlejob.assembler.UserAssembler;
+import com.repcar.viechlejob.beans.User;
+import com.repcar.viechlejob.controllers.UserController;
+import com.repcar.viechlejob.encryption.EncryptDecryptService;
+import com.repcar.viechlejob.repositories.UserRepository;
+import com.repcar.viechlejob.resources.UserResource;
 
 /**
  * @author <a href="mailto:tihomir.slavkov@repcarpro.com">Tihomir Slavkov</a>
