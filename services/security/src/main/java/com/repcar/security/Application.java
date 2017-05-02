@@ -13,9 +13,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-/**
- * @author <a href="mailto:imishev@repcarpro.com">Ivan Mishev</a>
- */
 
 @SpringBootApplication
 @EnableDiscoveryClient

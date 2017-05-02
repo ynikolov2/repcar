@@ -23,9 +23,6 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import com.repcar.security.encryption.DecryptService;
 import com.repcar.security.service.UserDAO;
 
-/**
- * @author <a href="mailto:tslavkov@repcarpro.com">Tihomir Slavkov</a>
- */
 
 @Configuration
 @EnableGlobalAuthentication

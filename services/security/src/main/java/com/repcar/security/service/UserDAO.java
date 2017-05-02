@@ -9,9 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.repcar.security.model.User;
 
-/**
- * @author <a href="mailto:imishev@repcarpro.com">Ivan Mishev</a>
- */
 @Repository
 @Transactional
 public interface UserDAO extends JpaRepository<User, Long> {

@@ -10,7 +10,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 
 /**
- * API Gateway service for WeeShop project.
+ * API Gateway service for repCar project.
  *
  */
 @SpringBootApplication

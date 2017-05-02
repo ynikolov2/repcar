@@ -13,10 +13,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.repcar.user.beans.User.Roles;
 
-/**
- * @author <a href="mailto:mstancheva@repcarpro.com">Mihaela Stancheva</a>
- *
- */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Relation(collectionRelation = "users", value = "user")
 public class UserResource extends ResourceSupport {
