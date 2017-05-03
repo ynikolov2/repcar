@@ -4,10 +4,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.repcar.rest</groupId>
-    <artifactId>viechle</artifactId>
+    <artifactId>viechle-job</artifactId>
     <packaging>war</packaging>
-    <name>viechle</name>
-    <description>viechle</description>
+    <name>viechle-job</name>
+    <description>viechle-job</description>
     <url>http://localhost:8333</url>
     <organization>
         <name>RepCar AD</name>
