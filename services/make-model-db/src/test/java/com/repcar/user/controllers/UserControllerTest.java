@@ -65,7 +65,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.repcar.makemodel.assembler.UserAssembler;
-import com.repcar.makemodel.beans.User;
+import com.repcar.makemodel.beans.User_old;
 import com.repcar.makemodel.controllers.UserController;
 import com.repcar.makemodel.encryption.EncryptDecryptService;
 import com.repcar.makemodel.repositories.UserRepository;
@@ -89,13 +89,13 @@ public class UserControllerTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private User newUser;
+    private User_old newUser;
 
     @Autowired
-    private User persistedUser;
+    private User_old persistedUser;
 
     @Autowired
-    private User forUpdateUser;
+    private User_old forUpdateUser;
 
     @MockBean
     private UserRepository userRepository;
@@ -156,7 +156,7 @@ public class UserControllerTest {
 
     @Test
     public void testGetLoggedUserNotExisting() throws Exception {
-        given(userRepository.findByUserName(USER_NAME)).willReturn(new User());
+        given(userRepository.findByUserName(USER_NAME)).willReturn(new User_old());
         ResultActions result = mockMvc.perform(get(USERS_URI + "/logged").header("Authorization", "Bearer FOO"));
         result.andExpect(status().isOk());
     }
@@ -164,7 +164,7 @@ public class UserControllerTest {
     @Test
     public void testCreateUser() throws Exception {
         given(encryptDecryptService.encrypt(newUser.getUserPassword())).willReturn(USER_PASSWORD_ENCRYPTED);
-        given(userRepository.save(any(User.class))).willReturn(persistedUser);
+        given(userRepository.save(any(User_old.class))).willReturn(persistedUser);
         given(userAssembler.toResource(persistedUser)).willCallRealMethod();
         ResultActions result = mockMvc.perform(post(USERS_URI).header("Authorization", "Bearer FOO")
                 .accept(MediaTypes.HAL_JSON_VALUE).contentType(MediaTypes.HAL_JSON_VALUE)
@@ -177,7 +177,7 @@ public class UserControllerTest {
 
     @Test
     public void testCreateUserBadRequest() throws Exception {
-        User wrongUser = new User();
+        User_old wrongUser = new User_old();
         ResultActions result = mockMvc.perform(post(USERS_URI).header("Authorization", "Bearer FOO")
                 .contentType(MediaTypes.HAL_JSON_VALUE).content(Util.convertObjectToJsonString(wrongUser)));
         result.andExpect(status().isBadRequest());
@@ -186,7 +186,7 @@ public class UserControllerTest {
     @Test
     public void testCreateUserError() throws Exception {
         given(encryptDecryptService.encrypt(newUser.getUserPassword())).willReturn(USER_PASSWORD_ENCRYPTED);
-        given(userRepository.save(any(User.class))).willThrow(
+        given(userRepository.save(any(User_old.class))).willThrow(
                 new ConstraintViolationException(null, new SQLException(), null));
         ResultActions result = mockMvc.perform(post(USERS_URI).header("Authorization", "Bearer FOO")
                 .contentType(MediaTypes.HAL_JSON_VALUE).content(Util.convertObjectToJsonString(newUser)));
@@ -196,9 +196,9 @@ public class UserControllerTest {
     @Test
     public void testGetUsersByCompany() throws Exception {
         Pageable pageRequest = new PageRequest(PAGE_NUMBER, PAGE_SIZE, Direction.ASC, "userName");
-        List<User> usersList = new ArrayList<User>();
+        List<User_old> usersList = new ArrayList<User_old>();
         usersList.add(persistedUser);
-        Page<User> users = new PageImpl<User>(usersList, pageRequest, 100);
+        Page<User_old> users = new PageImpl<User_old>(usersList, pageRequest, 100);
         given(userRepository.findByCompanyId(COMPANY_ID, pageRequest)).willReturn(users);
 
         MultiValueMap<String, String> mapOfParams = new LinkedMultiValueMap<>();
@@ -216,9 +216,9 @@ public class UserControllerTest {
     @Test
     public void testGetUsersWithoutCompanyId() throws Exception {
         Pageable pageRequest = new PageRequest(PAGE_NUMBER, PAGE_SIZE, Direction.ASC, "userName");
-        List<User> usersList = new ArrayList<User>();
+        List<User_old> usersList = new ArrayList<User_old>();
         usersList.add(persistedUser);
-        Page<User> pagedProducts = new PageImpl<User>(usersList, pageRequest, 100);
+        Page<User_old> pagedProducts = new PageImpl<User_old>(usersList, pageRequest, 100);
         given(userRepository.findByCompanyId(COMPANY_ID, pageRequest)).willReturn(pagedProducts);
 
         MultiValueMap<String, String> mapOfParams = new LinkedMultiValueMap<>();
@@ -282,7 +282,7 @@ public class UserControllerTest {
 
     @Test
     public void testUpdateUserBadRequest1() throws Exception {
-        User user = new User();
+        User_old user = new User_old();
         mockMvc.perform(
                 put(USERS_URI).header("Authorization", "Bearer FOO").accept(HAL_JSON).contentType(HAL_JSON)
                         .content(convertObjectToJsonString(user))).andExpect(status().isBadRequest());

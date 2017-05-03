@@ -7,7 +7,7 @@ import ch.qos.logback.classic.Level
 
 statusListener(OnConsoleStatusListener)
 
-def file = "${System.getProperty('log.dir', '')}viechle-%d.%i.log"
+def file = "${System.getProperty('log.dir', '')}viechle-job-%d.%i.log"
 
 appender("FILE", RollingFileAppender) {
     // add a status message regarding the file property
