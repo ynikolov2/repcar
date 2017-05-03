@@ -34,11 +34,7 @@ public class UnitTestContext {
     @Bean
     public User newUser() {
         User user = new User();
-        user.setUserFirstName(USER_FIRST_NAME);
-        user.setUserLastName(USER_LAST_NAME);
-        user.setUserEmail(USER_EMAIL);
         user.setUserName(USER_NAME);
-        user.setUserPassword(USER_PASSWORD);
         user.setUserRole(Roles.ROLE_USER);
         user.setCompanyId(COMPANY_ID);
         return user;
@@ -48,11 +44,7 @@ public class UnitTestContext {
     public User persistedUser() {
         User user = new User();
         user.setUserId(USER_ID);
-        user.setUserFirstName(USER_FIRST_NAME);
-        user.setUserLastName(USER_LAST_NAME);
-        user.setUserEmail(USER_EMAIL);
         user.setUserName(USER_NAME);
-        user.setUserPassword(USER_PASSWORD_ENCRYPTED);
         user.setUserRole(Roles.ROLE_USER);
         user.setCompanyId(COMPANY_ID);
         return user;
@@ -62,11 +54,7 @@ public class UnitTestContext {
     public User forUpdateUser() {
         User user = new User();
         user.setUserId(USER_ID);
-        user.setUserFirstName(USER_FIRST_NAME);
-        user.setUserLastName(USER_LAST_NAME);
-        user.setUserEmail(USER_EMAIL);
         user.setUserName(USER_NAME);
-        user.setUserPassword(USER_PASSWORD);
         user.setUserRole(Roles.ROLE_USER);
         user.setCompanyId(COMPANY_ID);
         return user;
