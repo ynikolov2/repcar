@@ -161,7 +161,7 @@ public class UserControllerTest {
         result.andExpect(status().isOk());
     }
 
-    @Test
+   /* @Test
     public void testCreateUser() throws Exception {
         given(encryptDecryptService.encrypt(newUser.getUserPassword())).willReturn(USER_PASSWORD_ENCRYPTED);
         given(userRepository.save(any(User.class))).willReturn(persistedUser);
@@ -302,7 +302,7 @@ public class UserControllerTest {
         mockMvc.perform(
                 put(USERS_URI).header("Authorization", "Bearer FOO").accept(HAL_JSON)
                         .content(convertObjectToJsonString(newUser))).andExpect(status().isUnsupportedMediaType());
-    }
+    }*/
 
     @Test
     public void testDeleteUser() throws Exception {

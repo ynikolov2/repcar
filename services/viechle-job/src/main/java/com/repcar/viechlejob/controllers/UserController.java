@@ -78,7 +78,7 @@ public class UserController {
         return ResponseEntity.ok(pagedResourcesAssembler.toResource(users, userAssembler, self));
     }
 
-    @RequestMapping(value = "/logged", method = GET, produces = HAL_JSON_VALUE)
+/*    @RequestMapping(value = "/logged", method = GET, produces = HAL_JSON_VALUE)
     public ResponseEntity<UserResource> getLoggedUser(OAuth2Authentication principal) {
         Map<String, ?> userInfo = (Map<String, ?>) principal.getUserAuthentication().getDetails();
         User user = userService.findByUserName((String) userInfo.get("name"));
@@ -120,7 +120,7 @@ public class UserController {
         UserResource userResource = userAssembler.toResource(user);
         logger.info("Updated user: {}", userResource);
         return ResponseEntity.ok(userResource);
-    }
+    }*/
 
     @RequestMapping(path = "/{userId:[\\d]+}", method = DELETE)
     public ResponseEntity<Void> delete(@PathVariable("userId") Long userId) {
