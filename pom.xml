@@ -20,6 +20,7 @@
         <module>services/discovery</module>
         <module>services/configuration</module>
         <module>services/security</module>
+        <module>services/workshop</module>
         <module>services/ui</module>
         <module>services/user</module>
         <module>services/api-gateway</module>
