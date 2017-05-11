@@ -50,12 +50,12 @@ public class SecurityConfig extends GlobalAuthenticationConfigurerAdapter {
             @Override
             public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
                 try {
-                    com.repcar.security.model.User user = userDAO.getUserByUserName(username);
-                    if (!user.getUserName().equals(username)) {
+                    com.repcar.security.model.User user = userDAO.getUserByUsername(username);
+                    if (!user.getUsername().equals(username)) {
                         throw new UsernameNotFoundException("DBUser does not exist");
                     }
 
-                    return new User(user.getUserName(), decryptService.decrypt(user.getUserPassword()), true, true,
+                    return new User(user.getUsername(), decryptService.decrypt(user.getUserPassword()), true, true,
                             true, true, AuthorityUtils.createAuthorityList(user.getUserRole().getRoleName()));
                 } catch (Exception e) {
                     throw new UsernameNotFoundException("DBUser does not exist");
