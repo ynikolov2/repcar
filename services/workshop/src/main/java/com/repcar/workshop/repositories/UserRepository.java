@@ -1,20 +1,19 @@
 /*
  * Copyright RepCar AD 2017
  */
-package com.repcar.user.repositories;
+package com.repcar.workshop.repositories;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.repcar.user.beans.User;
+import com.repcar.workshop.beans.User;
 
 /**
  * Home object for domain model class User.
- * 
+ *
  */
 @Repository
 @Transactional
@@ -22,6 +21,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     User findByUserName(String userName);
 
-    @PreAuthorize("hasAuthority('ROLE_USER')")
-    Page<User> findByCompanyId(Long companyId, Pageable pageable);
+    Page<User> findByWorkshopId(Long workshopId, Pageable pageable);
 }

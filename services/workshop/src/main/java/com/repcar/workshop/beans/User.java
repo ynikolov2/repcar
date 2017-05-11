@@ -1,7 +1,7 @@
 /*
  * Copyright RepCar AD 2017
  */
-package com.repcar.customer.beans;
+package com.repcar.workshop.beans;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,6 +18,9 @@ import javax.validation.constraints.Size;
 
 import org.springframework.hateoas.ResourceSupport;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 public class User extends ResourceSupport {
 
@@ -29,7 +32,7 @@ public class User extends ResourceSupport {
 
 	private Long userId;
 	private Workshop workshop;
-	private String username;
+	private String userName;
 	private String userEmail;
 	private String userFirstName;
 	private String userLastName;
@@ -38,9 +41,9 @@ public class User extends ResourceSupport {
 	public User() {
 	}
 
-	public User(String username, String userEmail, String userPassword, String userFirstName, String userLastName,
+	public User(String userName, String userEmail, String userPassword, String userFirstName, String userLastName,
 			String userImage, Roles userRole, Long companyId) {
-		this.username = username;
+		this.userName = userName;
 		this.userEmail = userEmail;
 		this.userFirstName = userFirstName;
 		this.userLastName = userLastName;
@@ -73,12 +76,12 @@ public class User extends ResourceSupport {
 	@NotNull(groups = { Create.class, Update.class })
 	@Size(min = 1, max = 80)
 	@Column(length = 80)
-	public String getUsername() {
-		return this.username;
+	public String getUserName() {
+		return this.userName;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	@NotNull(groups = { Create.class, Update.class })
@@ -135,7 +138,7 @@ public class User extends ResourceSupport {
 		result = prime * result + ((userEmail == null) ? 0 : userEmail.hashCode());
 		result = prime * result + ((userFirstName == null) ? 0 : userFirstName.hashCode());
 		result = prime * result + ((userLastName == null) ? 0 : userLastName.hashCode());
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
 		result = prime * result + ((userRole == null) ? 0 : userRole.hashCode());
 		return result;
 	}
@@ -169,10 +172,10 @@ public class User extends ResourceSupport {
 				return false;
 		} else if (!userLastName.equals(other.userLastName))
 			return false;
-		if (username == null) {
-			if (other.username != null)
+		if (userName == null) {
+			if (other.userName != null)
 				return false;
-		} else if (!username.equals(other.username))
+		} else if (!userName.equals(other.userName))
 			return false;
 		if (userRole != other.userRole)
 			return false;

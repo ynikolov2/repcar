@@ -45,8 +45,9 @@ import com.repcar.user.beans.User.Create;
 import com.repcar.user.beans.User.Update;
 import com.repcar.user.encryption.EncryptDecryptService;
 import com.repcar.user.exception.ExceptionBody;
-import com.repcar.user.repositories.UserRepository;
+import com.repcar.user.repositories.UserDAO;
 import com.repcar.user.resources.UserResource;
+import com.repcar.user.services.UserService;
 
 @RestController
 @RequestMapping("/users")
@@ -56,7 +57,7 @@ public class UserController {
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
-    private UserRepository userService;
+    private UserService userService;
 
     @Autowired
     private UserAssembler userAssembler;
@@ -68,7 +69,7 @@ public class UserController {
     public ResponseEntity<PagedResources<UserResource>> getUsers(
             @RequestParam(value = "companyId", required = true) Long companyId, Pageable pageable,
             PagedResourcesAssembler<User> pagedResourcesAssembler) {
-        Page<User> users = userService.findByCompanyId(companyId, pageable);
+        Page<User> users = userService.findByWorkshopId(companyId, pageable);
         Link self = linkTo(methodOn(UserController.class).getUsers(companyId, pageable, pagedResourcesAssembler))
                 .withSelfRel();
         logger.debug("Found users for companyId: {} - {}", companyId, users);
@@ -82,7 +83,7 @@ public class UserController {
     @RequestMapping(value = "/logged", method = GET, produces = HAL_JSON_VALUE)
     public ResponseEntity<UserResource> getLoggedUser(OAuth2Authentication principal) {
         Map<String, ?> userInfo = (Map<String, ?>) principal.getUserAuthentication().getDetails();
-        User user = userService.findByUserName((String) userInfo.get("name"));
+        User user = userService.findByUsername((String) userInfo.get("name"));
         if (user == null) {
             logger.info("User {} not found.", userInfo.get("name"));
             return new ResponseEntity<>(NOT_FOUND);
@@ -92,7 +93,7 @@ public class UserController {
 
     @RequestMapping(value = "/{userId:[\\d]+}", method = GET, produces = HAL_JSON_VALUE)
     public ResponseEntity<UserResource> getUser(@PathVariable("userId") Long userId) {
-        User user = userService.findOne(userId);
+        User user = userService.findById(userId);
         logger.info("For id: {} whe user is {}.", userId, user);
         if (user == null) {
             return new ResponseEntity<>(NOT_FOUND);
@@ -100,7 +101,7 @@ public class UserController {
         return ResponseEntity.ok(userAssembler.toResource(user));
     }
 
-    @RequestMapping(method = POST, consumes = HAL_JSON_VALUE, produces = HAL_JSON_VALUE)
+/*    @RequestMapping(method = POST, consumes = HAL_JSON_VALUE, produces = HAL_JSON_VALUE)
     public ResponseEntity<UserResource> create(@Validated({ Create.class }) @RequestBody User user) {
         user.setUserPassword(encryptDecryptService.encrypt(user.getUserPassword()));
         user = userService.save(user);
@@ -128,7 +129,7 @@ public class UserController {
         userService.delete(userId);
         logger.info("Deleted user with id: {}", userId);
         return ResponseEntity.noContent().build();
-    }
+    }*/
 
     @ExceptionHandler({ InvalidDataAccessApiUsageException.class, ConstraintViolationException.class })
     public ResponseEntity<ExceptionBody> handleBadRequestExcepion(Exception e) {

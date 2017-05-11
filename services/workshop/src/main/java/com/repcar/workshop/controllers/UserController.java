@@ -1,7 +1,7 @@
 /*
  * Copyright RepCar AD 2017
  */
-package com.repcar.customer.controllers;
+package com.repcar.workshop.controllers;
 
 import static org.springframework.hateoas.MediaTypes.HAL_JSON_VALUE;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
@@ -38,14 +38,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.repcar.customer.assembler.UserAssembler;
-import com.repcar.customer.beans.User;
-import com.repcar.customer.beans.User.Create;
-import com.repcar.customer.beans.User.Update;
-import com.repcar.customer.encryption.EncryptDecryptService;
-import com.repcar.customer.exception.ExceptionBody;
-import com.repcar.customer.repositories.UserRepository;
-import com.repcar.customer.resources.UserResource;
+import com.repcar.workshop.assembler.UserAssembler;
+import com.repcar.workshop.beans.User;
+import com.repcar.workshop.beans.User.Create;
+import com.repcar.workshop.beans.User.Update;
+import com.repcar.workshop.exception.ExceptionBody;
+import com.repcar.workshop.repositories.UserRepository;
+import com.repcar.workshop.resources.UserResource;
 
 @RestController
 @RequestMapping("/users")
@@ -60,17 +59,14 @@ public class UserController {
     @Autowired
     private UserAssembler userAssembler;
 
-    @Autowired
-    private EncryptDecryptService encryptDecryptService;
-
     @RequestMapping(method = GET, produces = HAL_JSON_VALUE)
     public ResponseEntity<PagedResources<UserResource>> getUsers(
-            @RequestParam(value = "companyId", required = true) Long companyId, Pageable pageable,
+            @RequestParam(value = "companyId", required = true) Long workshopId, Pageable pageable,
             PagedResourcesAssembler<User> pagedResourcesAssembler) {
-        Page<User> users = userService.findByCompanyId(companyId, pageable);
-        Link self = linkTo(methodOn(UserController.class).getUsers(companyId, pageable, pagedResourcesAssembler))
+        Page<User> users = userService.findByWorkshopId(workshopId, pageable);
+        Link self = linkTo(methodOn(UserController.class).getUsers(workshopId, pageable, pagedResourcesAssembler))
                 .withSelfRel();
-        logger.debug("Found users for companyId: {} - {}", companyId, users);
+        logger.debug("Found users for companyId: {} - {}", workshopId, users);
         if (!users.hasContent()) {
             return ResponseEntity.ok((PagedResources<UserResource>) pagedResourcesAssembler.toEmptyResource(users,
                     UserResource.class, self));
@@ -101,7 +97,7 @@ public class UserController {
 
     @RequestMapping(method = POST, consumes = HAL_JSON_VALUE, produces = HAL_JSON_VALUE)
     public ResponseEntity<UserResource> create(@Validated({ Create.class }) @RequestBody User user) {
-        user.setUserPassword(encryptDecryptService.encrypt(user.getUserPassword()));
+    //    user.setUserPassword(encryptDecryptService.encrypt(user.getUserPassword()));
         user = userService.save(user);
         UserResource resource = userAssembler.toResource(user);
         logger.info("Created user: {}", resource);
@@ -115,7 +111,7 @@ public class UserController {
         if (userService.findOne(user.getUserId()) == null) {
             throw new IllegalArgumentException("User is not found for the provided id " + user.getUserId());
         }
-        user.setUserPassword(encryptDecryptService.encrypt(user.getUserPassword()));
+     //   user.setUserPassword(encryptDecryptService.encrypt(user.getUserPassword()));
         user = userService.saveAndFlush(user);
         UserResource userResource = userAssembler.toResource(user);
         logger.info("Updated user: {}", userResource);

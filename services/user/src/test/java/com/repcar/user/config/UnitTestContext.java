@@ -37,10 +37,10 @@ public class UnitTestContext {
         user.setUserFirstName(USER_FIRST_NAME);
         user.setUserLastName(USER_LAST_NAME);
         user.setUserEmail(USER_EMAIL);
-        user.setUserName(USER_NAME);
+        user.setUsername(USER_NAME);
         user.setUserPassword(USER_PASSWORD);
         user.setUserRole(Roles.ROLE_USER);
-        user.setCompanyId(COMPANY_ID);
+        user.setWorkshopId(COMPANY_ID);
         return user;
     }
 
@@ -51,10 +51,10 @@ public class UnitTestContext {
         user.setUserFirstName(USER_FIRST_NAME);
         user.setUserLastName(USER_LAST_NAME);
         user.setUserEmail(USER_EMAIL);
-        user.setUserName(USER_NAME);
+        user.setUsername(USER_NAME);
         user.setUserPassword(USER_PASSWORD_ENCRYPTED);
         user.setUserRole(Roles.ROLE_USER);
-        user.setCompanyId(COMPANY_ID);
+        user.setWorkshopId(COMPANY_ID);
         return user;
     }
 
@@ -65,10 +65,10 @@ public class UnitTestContext {
         user.setUserFirstName(USER_FIRST_NAME);
         user.setUserLastName(USER_LAST_NAME);
         user.setUserEmail(USER_EMAIL);
-        user.setUserName(USER_NAME);
+        user.setUsername(USER_NAME);
         user.setUserPassword(USER_PASSWORD);
         user.setUserRole(Roles.ROLE_USER);
-        user.setCompanyId(COMPANY_ID);
+        user.setWorkshopId(COMPANY_ID);
         return user;
     }
 }

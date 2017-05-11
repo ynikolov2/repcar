@@ -64,14 +64,13 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.repcar.customer.assembler.UserAssembler;
-import com.repcar.customer.beans.User;
-import com.repcar.customer.controllers.UserController;
-import com.repcar.customer.encryption.EncryptDecryptService;
-import com.repcar.customer.repositories.UserRepository;
-import com.repcar.customer.resources.UserResource;
 import com.repcar.user.Util;
 import com.repcar.user.config.UnitTestContext;
+import com.repcar.workshop.assembler.UserAssembler;
+import com.repcar.workshop.beans.User;
+import com.repcar.workshop.controllers.UserController;
+import com.repcar.workshop.repositories.UserRepository;
+import com.repcar.workshop.resources.UserResource;
 
 /**
  * @author <a href="mailto:tihomir.slavkov@repcarpro.com">Tihomir Slavkov</a>
@@ -80,7 +79,7 @@ import com.repcar.user.config.UnitTestContext;
 @RunWith(SpringRunner.class)
 @WebMvcTest(controllers = { UserController.class })
 @ContextConfiguration(classes = { UserController.class, UserAssembler.class, UnitTestContext.class,
-        UserControllerTest.ResourceServerContext.class, EncryptDecryptService.class })
+        UserControllerTest.ResourceServerContext.class })
 public class UserControllerTest {
 
     @Autowired
@@ -118,9 +117,6 @@ public class UserControllerTest {
     private final String PAGE_NUMBER_STRING = "1";
     private final int PAGE_SIZE = 10;
     private final String PAGE_SIZE_STRING = "10";
-
-    @MockBean
-    private EncryptDecryptService encryptDecryptService;
 
     @Configuration
     @EnableResourceServer
@@ -163,7 +159,6 @@ public class UserControllerTest {
 
     @Test
     public void testCreateUser() throws Exception {
-        given(encryptDecryptService.encrypt(newUser.getUserPassword())).willReturn(USER_PASSWORD_ENCRYPTED);
         given(userRepository.save(any(User.class))).willReturn(persistedUser);
         given(userAssembler.toResource(persistedUser)).willCallRealMethod();
         ResultActions result = mockMvc.perform(post(USERS_URI).header("Authorization", "Bearer FOO")
@@ -185,7 +180,6 @@ public class UserControllerTest {
 
     @Test
     public void testCreateUserError() throws Exception {
-        given(encryptDecryptService.encrypt(newUser.getUserPassword())).willReturn(USER_PASSWORD_ENCRYPTED);
         given(userRepository.save(any(User.class))).willThrow(
                 new ConstraintViolationException(null, new SQLException(), null));
         ResultActions result = mockMvc.perform(post(USERS_URI).header("Authorization", "Bearer FOO")
@@ -199,7 +193,7 @@ public class UserControllerTest {
         List<User> usersList = new ArrayList<User>();
         usersList.add(persistedUser);
         Page<User> users = new PageImpl<User>(usersList, pageRequest, 100);
-        given(userRepository.findByCompanyId(COMPANY_ID, pageRequest)).willReturn(users);
+        given(userRepository.findByWorkshopId(COMPANY_ID, pageRequest)).willReturn(users);
 
         MultiValueMap<String, String> mapOfParams = new LinkedMultiValueMap<>();
         mapOfParams.add("companyId", COMPANY_ID.toString());
@@ -219,7 +213,7 @@ public class UserControllerTest {
         List<User> usersList = new ArrayList<User>();
         usersList.add(persistedUser);
         Page<User> pagedProducts = new PageImpl<User>(usersList, pageRequest, 100);
-        given(userRepository.findByCompanyId(COMPANY_ID, pageRequest)).willReturn(pagedProducts);
+        given(userRepository.findByWorkshopId(COMPANY_ID, pageRequest)).willReturn(pagedProducts);
 
         MultiValueMap<String, String> mapOfParams = new LinkedMultiValueMap<>();
         mapOfParams.add("page", PAGE_NUMBER_STRING);
@@ -241,7 +235,6 @@ public class UserControllerTest {
     @Test
     public void testGetUser() throws Exception {
         String encryptedPassword = "fb126394998693b116aed3d31fc12c401c41525e248a00203b201e2eec0074e4";
-        newUser.setUserPassword(encryptedPassword);
         given(userRepository.findOne(USER_ID)).willReturn(persistedUser);
         given(userAssembler.toResource(persistedUser)).willCallRealMethod();
         ResultActions result = mockMvc.perform(get(USERS_URI + "/{userId}", USER_ID)
@@ -260,8 +253,6 @@ public class UserControllerTest {
     @Test
     public void testUpdateUser() throws Exception {
         given(userRepository.findOne(forUpdateUser.getUserId())).willReturn(forUpdateUser);
-        given(encryptDecryptService.encrypt(forUpdateUser.getUserPassword())).willReturn(
-                forUpdateUser.getUserPassword());
         given(userRepository.saveAndFlush(forUpdateUser)).willReturn(forUpdateUser);
         given(userAssembler.toResource(forUpdateUser)).willCallRealMethod();
 

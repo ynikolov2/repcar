@@ -70,7 +70,7 @@ import com.repcar.user.beans.User;
 import com.repcar.user.config.UnitTestContext;
 import com.repcar.user.controllers.UserController;
 import com.repcar.user.encryption.EncryptDecryptService;
-import com.repcar.user.repositories.UserRepository;
+import com.repcar.user.repositories.UserDAO;
 import com.repcar.user.resources.UserResource;
 
 /**
@@ -98,7 +98,7 @@ public class UserControllerTest {
     private User forUpdateUser;
 
     @MockBean
-    private UserRepository userRepository;
+    private UserDAO userRepository;
 
     @MockBean
     private UserAssembler userAssembler;
@@ -156,7 +156,7 @@ public class UserControllerTest {
 
     @Test
     public void testGetLoggedUserNotExisting() throws Exception {
-        given(userRepository.findByUserName(USER_NAME)).willReturn(new User());
+        given(userRepository.findByUsername(USER_NAME)).willReturn(new User());
         ResultActions result = mockMvc.perform(get(USERS_URI + "/logged").header("Authorization", "Bearer FOO"));
         result.andExpect(status().isOk());
     }
@@ -199,7 +199,7 @@ public class UserControllerTest {
         List<User> usersList = new ArrayList<User>();
         usersList.add(persistedUser);
         Page<User> users = new PageImpl<User>(usersList, pageRequest, 100);
-        given(userRepository.findByCompanyId(COMPANY_ID, pageRequest)).willReturn(users);
+        given(userRepository.findByWorkshopId(COMPANY_ID, pageRequest)).willReturn(users);
 
         MultiValueMap<String, String> mapOfParams = new LinkedMultiValueMap<>();
         mapOfParams.add("companyId", COMPANY_ID.toString());
@@ -219,7 +219,7 @@ public class UserControllerTest {
         List<User> usersList = new ArrayList<User>();
         usersList.add(persistedUser);
         Page<User> pagedProducts = new PageImpl<User>(usersList, pageRequest, 100);
-        given(userRepository.findByCompanyId(COMPANY_ID, pageRequest)).willReturn(pagedProducts);
+        given(userRepository.findByWorkshopId(COMPANY_ID, pageRequest)).willReturn(pagedProducts);
 
         MultiValueMap<String, String> mapOfParams = new LinkedMultiValueMap<>();
         mapOfParams.add("page", PAGE_NUMBER_STRING);

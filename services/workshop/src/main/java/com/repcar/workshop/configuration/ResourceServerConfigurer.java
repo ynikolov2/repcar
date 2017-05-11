@@ -1,7 +1,7 @@
 /*
  * Copyright RepCar AD 2017
  */
-package com.repcar.user.configuration;
+package com.repcar.workshop.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoRestTemplateCustomizer;
@@ -22,7 +22,7 @@ public class ResourceServerConfigurer extends ResourceServerConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/health", "/info").permitAll().antMatchers("/users/logged")
+        http.authorizeRequests().antMatchers("/health", "/info").permitAll().antMatchers("/workshop**")
                 .permitAll().anyRequest().authenticated();
     }
 
