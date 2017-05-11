@@ -23,8 +23,7 @@ public class ResourceServerConfigurer extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/health", "/info").permitAll().antMatchers("/users/logged")
-                .hasAnyRole("CLIENT", "ADMIN", "OPERATOR", "USER", "ANONYMOUS").antMatchers("/users*", "/users/*")
-                .hasAnyRole("CLIENT", "ADMIN", "OPERATOR").anyRequest().authenticated();
+                .permitAll().anyRequest().authenticated();
     }
 
     @Bean

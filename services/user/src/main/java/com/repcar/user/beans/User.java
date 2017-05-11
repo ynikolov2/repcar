@@ -30,7 +30,7 @@ public class User extends ResourceSupport {
     }
 
     private Long userId;
-    private String userName;
+    private String username;
     private String userPassword;
     private String userEmail;
     private String userFirstName;
@@ -38,7 +38,7 @@ public class User extends ResourceSupport {
     private String userImage;
     private String userAttributes;
     private Roles userRole;
-    private Long companyId;
+    private Long workshopId;
     private Timestamp creationDate;
 
     @JsonCreator
@@ -46,18 +46,18 @@ public class User extends ResourceSupport {
     }
 
     @JsonCreator
-    public User(@JsonProperty("userName") String userName, @JsonProperty("userEmail") String userEmail,
+    public User(@JsonProperty("username") String username, @JsonProperty("userEmail") String userEmail,
             @JsonProperty("userPassword") String userPassword, @JsonProperty("userFirstName") String userFirstName,
             @JsonProperty("userLastName") String userLastName, @JsonProperty("userImage") String userImage,
-            @JsonProperty("userRole") Roles userRole, @JsonProperty("companyId") Long companyId) {
-        this.userName = userName;
+            @JsonProperty("userRole") Roles userRole, @JsonProperty("workshopId") Long workshopId) {
+        this.username = username;
         this.userEmail = userEmail;
         this.userPassword = userPassword;
         this.userFirstName = userFirstName;
         this.userLastName = userLastName;
         this.userImage = userImage;
         this.userRole = userRole;
-        this.companyId = companyId;
+        this.workshopId = workshopId;
     }
 
     @Id
@@ -76,12 +76,12 @@ public class User extends ResourceSupport {
     @NotNull(groups = { Create.class, Update.class })
     @Size(min = 1, max = 80)
     @Column(length = 80)
-    public String getUserName() {
-        return this.userName;
+    public String getUsername() {
+        return this.username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @NotNull(groups = { Create.class, Update.class })
@@ -148,12 +148,12 @@ public class User extends ResourceSupport {
     }
 
     @NotNull(groups = { Create.class, Update.class })
-    public Long getCompanyId() {
-        return companyId;
+    public Long getWorkshopId() {
+        return workshopId;
     }
 
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
+    public void setWorkshopId(Long workshopId) {
+        this.workshopId = workshopId;
     }
 
     public Timestamp getCreationDate() {
@@ -180,12 +180,12 @@ public class User extends ResourceSupport {
     public int hashCode() {
         final int prime = 31;
         int result = super.hashCode();
-        result = prime * result + ((companyId == null) ? 0 : companyId.hashCode());
+        result = prime * result + ((workshopId == null) ? 0 : workshopId.hashCode());
         result = prime * result + ((userEmail == null) ? 0 : userEmail.hashCode());
         result = prime * result + ((userFirstName == null) ? 0 : userFirstName.hashCode());
         result = prime * result + ((userImage == null) ? 0 : userImage.hashCode());
         result = prime * result + ((userLastName == null) ? 0 : userLastName.hashCode());
-        result = prime * result + ((userName == null) ? 0 : userName.hashCode());
+        result = prime * result + ((username == null) ? 0 : username.hashCode());
         result = prime * result + ((userRole == null) ? 0 : userRole.hashCode());
         result = prime * result + ((userAttributes == null) ? 0 : userAttributes.hashCode());
         return result;
@@ -200,10 +200,10 @@ public class User extends ResourceSupport {
         if (getClass() != obj.getClass())
             return false;
         User other = (User) obj;
-        if (companyId == null) {
-            if (other.companyId != null)
+        if (workshopId == null) {
+            if (other.workshopId != null)
                 return false;
-        } else if (!companyId.equals(other.companyId))
+        } else if (!workshopId.equals(other.workshopId))
             return false;
         if (userEmail == null) {
             if (other.userEmail != null)
@@ -230,10 +230,10 @@ public class User extends ResourceSupport {
                 return false;
         } else if (!userAttributes.equals(other.userAttributes))
             return false;
-        if (userName == null) {
-            if (other.userName != null)
+        if (username == null) {
+            if (other.username != null)
                 return false;
-        } else if (!userName.equals(other.userName))
+        } else if (!username.equals(other.username))
             return false;
         if (userRole != other.userRole)
             return false;
