@@ -12,5 +12,5 @@ import com.repcar.security.model.User;
 @Repository
 @Transactional
 public interface UserDAO extends JpaRepository<User, Long> {
-    User getUserByUserName(String userName);
+    User getUserByUsername(String username);
 }
