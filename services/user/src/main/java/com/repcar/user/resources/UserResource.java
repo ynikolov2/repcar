@@ -11,81 +11,106 @@ import org.springframework.hateoas.core.Relation;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.repcar.user.beans.User.Roles;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Relation(collectionRelation = "users", value = "user")
 public class UserResource extends ResourceSupport {
 
-    private Long userId;
-    private String userName;
-    private String userEmail;
-    private String userFirstName;
-    private String userLastName;
-    private String userImage;
-    private Roles userRole;
-    private Timestamp creationDate;
-    private String userAttributes;
+	private Long userId;
+	private String username;
+	private String userPassword;
+	private String userEmail;
+	private String userFirstName;
+	private String userLastName;
+	private Long userRoleId;
+	private Long workshopId;
+	private Timestamp creationDate;
+	private String tel;
+	private boolean forcePasswordChange;
+	private String status;
+	private Long parentUserId;
+	private Long userSettingsId;
 
-    @JsonCreator
-    public UserResource() {
+	@JsonCreator
+	public UserResource(@JsonProperty("username") String username, @JsonProperty("userEmail") String userEmail,
+			@JsonProperty("userPassword") String userPassword, @JsonProperty("userFirstName") String userFirstName,
+			@JsonProperty("userLastName") String userLastName, @JsonProperty("userRoleId") Long userRoleId,
+			@JsonProperty("workshopId") Long workshopId, @JsonProperty("tel") String tel,
+			@JsonProperty("forcePasswordChange") boolean forcePasswordChange, @JsonProperty("status") String status,
+			@JsonProperty("parentUserId") Long parentUserId, @JsonProperty("userSettingsId") Long userSettingsId) {
+		this.username = username;
+		this.userEmail = userEmail;
+		this.userPassword = userPassword;
+		this.userFirstName = userFirstName;
+		this.userLastName = userLastName;
+		this.userRoleId = userRoleId;
+		this.workshopId = workshopId;
+		this.forcePasswordChange = forcePasswordChange;
+		this.status = status;
+		this.parentUserId = parentUserId;
+		this.tel = tel;
+		this.userSettingsId = userSettingsId;
+	}
 
-    }
+	@JsonCreator
+	public UserResource() {
 
-    @JsonCreator
-    public UserResource(@JsonProperty("userId") Long userId, @JsonProperty("userName") String userName,
-            @JsonProperty("userEmail") String userEmail, @JsonProperty("userFirstName") String userFirstName,
-            @JsonProperty("userLastName") String userLastName, @JsonProperty("userImage") String userImage,
-            @JsonProperty("userRole") Roles roles, @JsonProperty("creationDate") Timestamp creationDate,
-            @JsonProperty("userAttributes") String userAttributes) {
-        this.userId = userId;
-        this.userName = userName;
-        this.userEmail = userEmail;
-        this.userFirstName = userFirstName;
-        this.userLastName = userLastName;
-        this.userImage = userImage;
-        this.userRole = roles;
-        this.creationDate = creationDate;
-        this.userAttributes = userAttributes;
-    }
+	}
 
-    public Long getUserId() {
-        return this.userId;
-    }
+	public Long getUserId() {
+		return userId;
+	}
 
-    public String getUserName() {
-        return this.userName;
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    public String getUserEmail() {
-        return this.userEmail;
-    }
+	public String getUserPassword() {
+		return userPassword;
+	}
 
-    public String getUserFirstName() {
-        return this.userFirstName;
-    }
+	public String getUserEmail() {
+		return userEmail;
+	}
 
-    public String getUserLastName() {
-        return this.userLastName;
-    }
+	public String getUserFirstName() {
+		return userFirstName;
+	}
 
-    public String getUserImage() {
-        return this.userImage;
-    }
+	public String getUserLastName() {
+		return userLastName;
+	}
 
-    public Roles getUserRole() {
-        return this.userRole;
-    }
+	public Long getUserRoleId() {
+		return userRoleId;
+	}
 
-    public Timestamp getCreationDate() {
-        return creationDate;
-    }
+	public Long getWorkshopId() {
+		return workshopId;
+	}
 
-    public String getUserAttributes() {
-        return userAttributes;
-    }
+	public Timestamp getCreationDate() {
+		return creationDate;
+	}
 
-    public void setUserAttributes(String userAttributes) {
-        this.userAttributes = userAttributes;
-    }
+	public String getTel() {
+		return tel;
+	}
+
+	public boolean isForcePasswordChange() {
+		return forcePasswordChange;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public Long getParentUserId() {
+		return parentUserId;
+	}
+
+	public Long getUserSettingsId() {
+		return userSettingsId;
+	}
+
 }
