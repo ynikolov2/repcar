@@ -11,7 +11,7 @@ import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.security.oauth2.client.OAuth2RestOperations;
 
 import com.repcar.user.beans.User;
-import com.repcar.user.beans.User.Roles;
+
 
 @Configuration
 @EnableSpringDataWebSupport
@@ -39,7 +39,7 @@ public class UnitTestContext {
         user.setUserEmail(USER_EMAIL);
         user.setUsername(USER_NAME);
         user.setUserPassword(USER_PASSWORD);
-        user.setUserRole(Roles.ROLE_USER);
+        user.setUserRoleId(1L);
         user.setWorkshopId(COMPANY_ID);
         return user;
     }
@@ -53,7 +53,7 @@ public class UnitTestContext {
         user.setUserEmail(USER_EMAIL);
         user.setUsername(USER_NAME);
         user.setUserPassword(USER_PASSWORD_ENCRYPTED);
-        user.setUserRole(Roles.ROLE_USER);
+        user.setUserRoleId(2L);
         user.setWorkshopId(COMPANY_ID);
         return user;
     }
@@ -67,7 +67,7 @@ public class UnitTestContext {
         user.setUserEmail(USER_EMAIL);
         user.setUsername(USER_NAME);
         user.setUserPassword(USER_PASSWORD);
-        user.setUserRole(Roles.ROLE_USER);
+        user.setUserRoleId(2L);
         user.setWorkshopId(COMPANY_ID);
         return user;
     }

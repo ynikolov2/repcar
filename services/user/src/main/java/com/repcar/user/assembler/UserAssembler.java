@@ -15,16 +15,17 @@ import com.repcar.user.resources.UserResource;
 @Service
 public class UserAssembler extends ResourceAssemblerSupport<User, UserResource> {
 
-    public UserAssembler() {
-        super(UserController.class, UserResource.class);
-    }
+	public UserAssembler() {
+		super(UserController.class, UserResource.class);
+	}
 
-    public UserResource toResource(User user) {
-        UserResource resource = new UserResource(user.getUserId(), user.getUsername(), user.getUserEmail(),
-                user.getUserFirstName(), user.getUserLastName(), user.getUserImage(), user.getUserRole(),
-                user.getCreationDate(), user.getUserAttributes());
-        resource.add(linkTo(UserController.class).slash(user.getUserId()).withSelfRel());
-        return resource;
-    }
+	public UserResource toResource(User user) {
+		UserResource resource = new UserResource(user.getUsername(), user.getUserEmail(), user.getUserPassword(),
+				user.getUserFirstName(), user.getUserLastName(), user.getUserRoleId(), user.getWorkshopId(),
+				user.getTel(), user.isForcePasswordChange(), user.getStatus(), user.getParentUserId(),
+				user.getUserSettingsId());
+		resource.add(linkTo(UserController.class).slash(user.getUserId()).withSelfRel());
+		return resource;
+	}
 
 }
