@@ -19,9 +19,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.repcar.security.encryption.DecryptService;
 import com.repcar.security.service.UserDAO;
+import com.repcar.security.service.UserRoleDAO;
 
 
 @Configuration
@@ -35,6 +37,9 @@ public class SecurityConfig extends GlobalAuthenticationConfigurerAdapter {
 
     @Autowired
     private UserDAO userDAO;
+    
+    @Autowired
+    private UserRoleDAO userRoleDAO;
 
     @Autowired
     private DecryptService decryptService;

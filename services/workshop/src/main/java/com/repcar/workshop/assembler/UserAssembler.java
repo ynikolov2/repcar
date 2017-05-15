@@ -21,7 +21,7 @@ public class UserAssembler extends ResourceAssemblerSupport<User, UserResource> 
 
     public UserResource toResource(User user) {
         UserResource resource = new UserResource(user.getUserId(), user.getWorkshop(), user.getUserName(), user.getUserEmail(),
-                user.getUserFirstName(), user.getUserLastName(), user.getUserRole());
+                user.getUserFirstName(), user.getUserLastName());
         resource.add(linkTo(UserController.class).slash(user.getUserId()).withSelfRel());
         return resource;
     }

@@ -12,7 +12,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.repcar.workshop.beans.Workshop;
-import com.repcar.workshop.beans.User.Roles;
 
 /**
  * @author <a href="mailto:mstancheva@repcarpro.com">Mihaela Stancheva</a>
@@ -28,7 +27,6 @@ public class UserResource extends ResourceSupport {
     private String userEmail;
     private String userFirstName;
     private String userLastName;
-    private Roles userRole;
 
     @JsonCreator
     public UserResource() {
@@ -38,14 +36,13 @@ public class UserResource extends ResourceSupport {
     @JsonCreator
     public UserResource(@JsonProperty("userId") Long userId,@JsonProperty("workshopId") Workshop workshop, @JsonProperty("userName") String userName,
             @JsonProperty("userEmail") String userEmail, @JsonProperty("userFirstName") String userFirstName,
-            @JsonProperty("userLastName") String userLastName, @JsonProperty("userRole") Roles roles) {
+            @JsonProperty("userLastName") String userLastName) {
         this.userId = userId;
         this.workshop = workshop;
         this.userName = userName;
         this.userEmail = userEmail;
         this.userFirstName = userFirstName;
         this.userLastName = userLastName;
-        this.userRole = roles;
     }
 
     public Long getUserId() {
@@ -66,10 +63,6 @@ public class UserResource extends ResourceSupport {
 
     public String getUserLastName() {
         return this.userLastName;
-    }
-
-    public Roles getUserRole() {
-        return this.userRole;
     }
 
 }
