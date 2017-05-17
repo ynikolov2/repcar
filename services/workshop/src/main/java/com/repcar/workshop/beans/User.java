@@ -36,18 +36,16 @@ public class User extends ResourceSupport {
 	private String userEmail;
 	private String userFirstName;
 	private String userLastName;
-	private Roles userRole;
 
 	public User() {
 	}
 
 	public User(String userName, String userEmail, String userPassword, String userFirstName, String userLastName,
-			String userImage, Roles userRole, Long companyId) {
+			String userImage, Long companyId) {
 		this.userName = userName;
 		this.userEmail = userEmail;
 		this.userFirstName = userFirstName;
 		this.userLastName = userLastName;
-		this.userRole = userRole;
 	}
 
 	@Id
@@ -117,20 +115,6 @@ public class User extends ResourceSupport {
 		this.userLastName = userLastName;
 	}
 
-	@NotNull(groups = { Create.class, Update.class })
-	@Enumerated(EnumType.STRING)
-	public Roles getUserRole() {
-		return this.userRole;
-	}
-
-	public void setUserRole(Roles userRole) {
-		this.userRole = userRole;
-	}
-
-	public enum Roles {
-		ROLE_ADMIN, ROLE_USER, ROLE_ANONYMOUS, ROLE_OPERATOR
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -139,7 +123,6 @@ public class User extends ResourceSupport {
 		result = prime * result + ((userFirstName == null) ? 0 : userFirstName.hashCode());
 		result = prime * result + ((userLastName == null) ? 0 : userLastName.hashCode());
 		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
-		result = prime * result + ((userRole == null) ? 0 : userRole.hashCode());
 		return result;
 	}
 
@@ -176,8 +159,6 @@ public class User extends ResourceSupport {
 			if (other.userName != null)
 				return false;
 		} else if (!userName.equals(other.userName))
-			return false;
-		if (userRole != other.userRole)
 			return false;
 		return true;
 	}

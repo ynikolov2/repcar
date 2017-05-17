@@ -9,8 +9,11 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.springframework.hateoas.ResourceSupport;
 
 import com.repcar.security.model.User;
 
@@ -19,31 +22,29 @@ import com.repcar.security.model.User;
  */
 @Entity
 @Table(name = "user_role", catalog = "repcar")
-public class UserRole implements java.io.Serializable {
+public class UserRole extends ResourceSupport {
 
-	private Integer roleId;
+	private Long roleId;
 	private String roleName;
 	private String roleDescription;
-	private Set<User> users = new HashSet<User>(0);
 
 	public UserRole() {
 	}
 
-	public UserRole(String roleName, String roleDescription, Set<User> users) {
+	public UserRole(String roleName, String roleDescription) {
 		this.roleName = roleName;
 		this.roleDescription = roleDescription;
-		this.users = users;
 	}
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 
 	@Column(name = "role_id", unique = true, nullable = false)
-	public Integer getRoleId() {
+	public Long getRoleId() {
 		return this.roleId;
 	}
 
-	public void setRoleId(Integer roleId) {
+	public void setRoleId(Long roleId) {
 		this.roleId = roleId;
 	}
 
@@ -64,15 +65,4 @@ public class UserRole implements java.io.Serializable {
 	public void setRoleDescription(String roleDescription) {
 		this.roleDescription = roleDescription;
 	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "userRole")
-	public Set<User> getUsers() {
-		return this.users;
-	}
-
-	public void setUsers(Set<User> users) {
-		this.users = users;
-	}
-
-
 }
