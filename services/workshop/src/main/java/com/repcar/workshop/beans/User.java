@@ -3,6 +3,8 @@
  */
 package com.repcar.workshop.beans;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
@@ -22,6 +25,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
+@Table(name = "user", catalog = "repcar")
 public class User extends ResourceSupport {
 
 	public interface Update {
@@ -30,22 +34,27 @@ public class User extends ResourceSupport {
 	public interface Create {
 	}
 
-	private Long userId;
-	private Workshop workshop;
-	private String userName;
+	private long userId;
+	private String username;
 	private String userEmail;
 	private String userFirstName;
 	private String userLastName;
+	private Workshop workshop;
+	private String status;
 
+	@JsonCreator
 	public User() {
 	}
 
-	public User(String userName, String userEmail, String userPassword, String userFirstName, String userLastName,
-			String userImage, Long companyId) {
-		this.userName = userName;
+	@JsonCreator
+	public User(@JsonProperty("username") String username, @JsonProperty("userEmail") String userEmail, @JsonProperty("userFirstName") String userFirstName, @JsonProperty("userLastName") String userLastName, @JsonProperty("workshop") Workshop workshop,
+			@JsonProperty("status") String status) {
+		this.username = username;
 		this.userEmail = userEmail;
 		this.userFirstName = userFirstName;
 		this.userLastName = userLastName;
+		this.workshop = workshop;
+		this.setStatus(status);
 	}
 
 	@Id
@@ -75,11 +84,11 @@ public class User extends ResourceSupport {
 	@Size(min = 1, max = 80)
 	@Column(length = 80)
 	public String getUserName() {
-		return this.userName;
+		return this.username;
 	}
 
 	public void setUserName(String userName) {
-		this.userName = userName;
+		this.username = userName;
 	}
 
 	@NotNull(groups = { Create.class, Update.class })
@@ -114,15 +123,27 @@ public class User extends ResourceSupport {
 	public void setUserLastName(String userLastName) {
 		this.userLastName = userLastName;
 	}
+	
+	@Column(name = "status", nullable = false, length = 20)
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((userEmail == null) ? 0 : userEmail.hashCode());
 		result = prime * result + ((userFirstName == null) ? 0 : userFirstName.hashCode());
+		result = prime * result + (int) (userId ^ (userId >>> 32));
 		result = prime * result + ((userLastName == null) ? 0 : userLastName.hashCode());
-		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		result = prime * result + ((workshop == null) ? 0 : workshop.hashCode());
 		return result;
 	}
 
@@ -135,10 +156,10 @@ public class User extends ResourceSupport {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		if (workshop == null) {
-			if (other.workshop != null)
+		if (status == null) {
+			if (other.status != null)
 				return false;
-		} else if (!workshop.equals(other.workshop))
+		} else if (!status.equals(other.status))
 			return false;
 		if (userEmail == null) {
 			if (other.userEmail != null)
@@ -150,17 +171,26 @@ public class User extends ResourceSupport {
 				return false;
 		} else if (!userFirstName.equals(other.userFirstName))
 			return false;
+		if (userId != other.userId)
+			return false;
 		if (userLastName == null) {
 			if (other.userLastName != null)
 				return false;
 		} else if (!userLastName.equals(other.userLastName))
 			return false;
-		if (userName == null) {
-			if (other.userName != null)
+		if (username == null) {
+			if (other.username != null)
 				return false;
-		} else if (!userName.equals(other.userName))
+		} else if (!username.equals(other.username))
+			return false;
+		if (workshop == null) {
+			if (other.workshop != null)
+				return false;
+		} else if (!workshop.equals(other.workshop))
 			return false;
 		return true;
 	}
+
+	
 
 }

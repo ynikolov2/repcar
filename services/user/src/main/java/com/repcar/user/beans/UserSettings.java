@@ -3,14 +3,11 @@ package com.repcar.user.beans;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+
 
 import org.springframework.hateoas.ResourceSupport;
 
@@ -24,11 +21,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Table(name = "user_settings", catalog = "repcar")
 public class UserSettings extends ResourceSupport {
 
-	private Integer userSettingsId;
+	private long userSettingsId;
 	private String avatar;
 	private String theme;
 	private String local;
 	private String language;
+
 
 	@JsonCreator
 	public UserSettings() {
@@ -47,11 +45,11 @@ public class UserSettings extends ResourceSupport {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "user_settings_id", unique = true, nullable = false)
-	public Integer getUserSettingsId() {
+	public long getUserSettingsId() {
 		return this.userSettingsId;
 	}
 
-	public void setUserSettingsId(Integer userSettingsId) {
+	public void setUserSettingsId(long userSettingsId) {
 		this.userSettingsId = userSettingsId;
 	}
 
@@ -89,6 +87,52 @@ public class UserSettings extends ResourceSupport {
 
 	public void setLanguage(String language) {
 		this.language = language;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((avatar == null) ? 0 : avatar.hashCode());
+		result = prime * result + ((language == null) ? 0 : language.hashCode());
+		result = prime * result + ((local == null) ? 0 : local.hashCode());
+		result = prime * result + ((theme == null) ? 0 : theme.hashCode());
+		result = prime * result + (int) (userSettingsId ^ (userSettingsId >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UserSettings other = (UserSettings) obj;
+		if (avatar == null) {
+			if (other.avatar != null)
+				return false;
+		} else if (!avatar.equals(other.avatar))
+			return false;
+		if (language == null) {
+			if (other.language != null)
+				return false;
+		} else if (!language.equals(other.language))
+			return false;
+		if (local == null) {
+			if (other.local != null)
+				return false;
+		} else if (!local.equals(other.local))
+			return false;
+		if (theme == null) {
+			if (other.theme != null)
+				return false;
+		} else if (!theme.equals(other.theme))
+			return false;
+		if (userSettingsId != other.userSettingsId)
+			return false;
+		return true;
 	}
 
 }

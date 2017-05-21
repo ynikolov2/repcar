@@ -19,6 +19,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
@@ -32,7 +34,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
-@Table(name = "user") 
+@Table(name = "user",catalog = "repcar") 
 public class User extends ResourceSupport {
 
 	public interface Update {
@@ -41,7 +43,7 @@ public class User extends ResourceSupport {
 	public interface Create {
 	}
 
-	private Long userId;
+	private long userId;
 	private String username;
 	private String userPassword;
 	private String userEmail;
@@ -56,16 +58,16 @@ public class User extends ResourceSupport {
 	private Boolean forcePassChange;
 	private String telephone;
 	private String status;
-	private Integer parentUserId;
+	private long parentUserId;
 
 	@JsonCreator
 	public User() {
 	}
 
 	@JsonCreator
-	public User(String username, String userEmail, String userPassword, String userFirstName, String userLastName,
-			String userImage, UserRole userRole, Workshop workshop, Boolean forcePassChange, String telephone,
-			String status, Integer parentUserId, UserSettings userSettings) {
+	public User(@JsonProperty("username") String username, @JsonProperty("userEmail") String userEmail, @JsonProperty("userPassword")  String userPassword, @JsonProperty("userFirstName") String userFirstName,  @JsonProperty("userLastName") String userLastName,
+			@JsonProperty("userImage") String userImage, @JsonProperty("userRole")  UserRole userRole, @JsonProperty("workshop") Workshop workshop,@JsonProperty("forcePassChange") Boolean forcePassChange, @JsonProperty("telephone") String telephone,
+			@JsonProperty("status") String status, @JsonProperty("parentUserId") long parentUserId, @JsonProperty("userSettings") UserSettings userSettings) {
 		this.username = username;
 		this.userEmail = userEmail;
 		this.userPassword = userPassword;
@@ -179,8 +181,7 @@ public class User extends ResourceSupport {
         this.userRole = userRole;
     }
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE,
-			CascadeType.DETACH })
+	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
 	@JoinColumn(name = "workshop_id", nullable = false)
 	public Workshop getWorkshop() {
 		return workshop;
@@ -200,6 +201,8 @@ public class User extends ResourceSupport {
 		this.userSettings = userSettings;
 	}
 	
+	@Column(name = "created", nullable = false, length = 19)
+	@Temporal(TemporalType.TIMESTAMP)
 	public Timestamp getCreationDate() {
 		return creationDate;
 	}
@@ -235,11 +238,11 @@ public class User extends ResourceSupport {
 	}
 
 	@Column(name = "parent_user_id")
-	public Integer getParentUserId() {
+	public long getParentUserId() {
 		return this.parentUserId;
 	}
 
-	public void setParentUserId(Integer parentUserId) {
+	public void setParentUserId(long parentUserId) {
 		this.parentUserId = parentUserId;
 	}
 
@@ -247,14 +250,22 @@ public class User extends ResourceSupport {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((workshop == null) ? 0 : workshop.hashCode());
+		result = prime * result + ((creationDate == null) ? 0 : creationDate.hashCode());
+		result = prime * result + ((forcePassChange == null) ? 0 : forcePassChange.hashCode());
+		result = prime * result + (int) (parentUserId ^ (parentUserId >>> 32));
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		result = prime * result + ((telephone == null) ? 0 : telephone.hashCode());
+		result = prime * result + ((userAttributes == null) ? 0 : userAttributes.hashCode());
 		result = prime * result + ((userEmail == null) ? 0 : userEmail.hashCode());
 		result = prime * result + ((userFirstName == null) ? 0 : userFirstName.hashCode());
+		result = prime * result + (int) (userId ^ (userId >>> 32));
 		result = prime * result + ((userImage == null) ? 0 : userImage.hashCode());
 		result = prime * result + ((userLastName == null) ? 0 : userLastName.hashCode());
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		result = prime * result + ((userPassword == null) ? 0 : userPassword.hashCode());
 		result = prime * result + ((userRole == null) ? 0 : userRole.hashCode());
-		result = prime * result + ((userAttributes == null) ? 0 : userAttributes.hashCode());
+		result = prime * result + ((userSettings == null) ? 0 : userSettings.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		result = prime * result + ((workshop == null) ? 0 : workshop.hashCode());
 		return result;
 	}
 
@@ -267,10 +278,32 @@ public class User extends ResourceSupport {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		if (workshop == null) {
-			if (other.workshop != null)
+		if (creationDate == null) {
+			if (other.creationDate != null)
 				return false;
-		} else if (!workshop.equals(other.workshop))
+		} else if (!creationDate.equals(other.creationDate))
+			return false;
+		if (forcePassChange == null) {
+			if (other.forcePassChange != null)
+				return false;
+		} else if (!forcePassChange.equals(other.forcePassChange))
+			return false;
+		if (parentUserId != other.parentUserId)
+			return false;
+		if (status == null) {
+			if (other.status != null)
+				return false;
+		} else if (!status.equals(other.status))
+			return false;
+		if (telephone == null) {
+			if (other.telephone != null)
+				return false;
+		} else if (!telephone.equals(other.telephone))
+			return false;
+		if (userAttributes == null) {
+			if (other.userAttributes != null)
+				return false;
+		} else if (!userAttributes.equals(other.userAttributes))
 			return false;
 		if (userEmail == null) {
 			if (other.userEmail != null)
@@ -282,6 +315,8 @@ public class User extends ResourceSupport {
 				return false;
 		} else if (!userFirstName.equals(other.userFirstName))
 			return false;
+		if (userId != other.userId)
+			return false;
 		if (userImage == null) {
 			if (other.userImage != null)
 				return false;
@@ -292,17 +327,30 @@ public class User extends ResourceSupport {
 				return false;
 		} else if (!userLastName.equals(other.userLastName))
 			return false;
-		if (userAttributes == null) {
-			if (other.userAttributes != null)
+		if (userPassword == null) {
+			if (other.userPassword != null)
 				return false;
-		} else if (!userAttributes.equals(other.userAttributes))
+		} else if (!userPassword.equals(other.userPassword))
+			return false;
+		if (userRole == null) {
+			if (other.userRole != null)
+				return false;
+		} else if (!userRole.equals(other.userRole))
+			return false;
+		if (userSettings == null) {
+			if (other.userSettings != null)
+				return false;
+		} else if (!userSettings.equals(other.userSettings))
 			return false;
 		if (username == null) {
 			if (other.username != null)
 				return false;
 		} else if (!username.equals(other.username))
 			return false;
-		if (userRole != other.userRole)
+		if (workshop == null) {
+			if (other.workshop != null)
+				return false;
+		} else if (!workshop.equals(other.workshop))
 			return false;
 		return true;
 	}
