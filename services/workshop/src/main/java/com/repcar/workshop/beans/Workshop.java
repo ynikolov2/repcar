@@ -4,21 +4,22 @@
 //Generated May 2, 2017 2:05:10 PM by Hibernate Tools 5.2.1.Final
 package com.repcar.workshop.beans;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.springframework.hateoas.ResourceSupport;
 
@@ -224,7 +225,7 @@ public class Workshop extends ResourceSupport {
 		this.status = status;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "workshop_id")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "workshop_id",cascade = CascadeType.ALL, orphanRemoval = true)
 	public Set<Subscription> getSubscriptions() {
 		return this.subscriptions;
 	}
@@ -243,7 +244,7 @@ public class Workshop extends ResourceSupport {
 		this.workshopSettings = workshopSettings;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "workshop_id")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "workshop_id",cascade = CascadeType.ALL, orphanRemoval = true)
 	public Set<WorshopDefinedService> getWorshopDefinedService() {
 		return this.worshopDefinedService;
 	}
@@ -252,7 +253,7 @@ public class Workshop extends ResourceSupport {
 		this.worshopDefinedService = worshopDefinedService;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "workshop_id")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "workshop_id",cascade = CascadeType.ALL, orphanRemoval = true)
 	public Set<User> getUsers() {
 		return this.users;
 	}
@@ -261,7 +262,7 @@ public class Workshop extends ResourceSupport {
 		this.users = users;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "workshop_id")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "workshop_id",cascade = CascadeType.ALL, orphanRemoval = true)
 	public Set<WorkshopCustomer> getWorkshopCustomers() {
 		return this.workshopCustomers;
 	}
@@ -280,7 +281,7 @@ public class Workshop extends ResourceSupport {
 		this.workshopInvoiceDetails = workshopInvoiceDetails;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "workshop_id")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "workshop_id",cascade = CascadeType.ALL, orphanRemoval = true)
 	public Set<Car> getCars() {
 		return this.cars;
 	}

@@ -4,13 +4,16 @@
 //Generated May 2, 2017 2:05:10 PM by Hibernate Tools 5.2.1.Final
 package com.repcar.user.beans;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -59,7 +62,7 @@ public class Workshop extends ResourceSupport {
 		this.workshopName = workshopName;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "workshop")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "workshop", cascade = CascadeType.ALL, orphanRemoval = true)
 	public Set<User> getUsers() {
 		return this.users;
 	}

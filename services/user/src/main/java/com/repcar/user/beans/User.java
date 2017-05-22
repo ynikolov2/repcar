@@ -4,29 +4,22 @@
 package com.repcar.user.beans;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
-import javax.persistence.UniqueConstraint;
 
 import org.springframework.hateoas.ResourceSupport;
 
@@ -170,8 +163,7 @@ public class User extends ResourceSupport {
 	}
 
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.REFRESH, CascadeType.PERSIST, CascadeType.MERGE,
-			CascadeType.DETACH })
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "role_id", nullable = false)
     public UserRole getUserRole() {
         return userRole;
@@ -181,7 +173,7 @@ public class User extends ResourceSupport {
         this.userRole = userRole;
     }
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "workshop_id", nullable = false)
 	public Workshop getWorkshop() {
 		return workshop;
