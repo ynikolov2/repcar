@@ -43,9 +43,9 @@ import com.repcar.user.assembler.UserAssembler;
 import com.repcar.user.beans.User;
 import com.repcar.user.beans.User.Create;
 import com.repcar.user.beans.User.Update;
+import com.repcar.user.dao.UserDAO;
 import com.repcar.user.encryption.EncryptDecryptService;
 import com.repcar.user.exception.ExceptionBody;
-import com.repcar.user.repositories.UserDAO;
 import com.repcar.user.resources.UserResource;
 import com.repcar.user.services.UserService;
 

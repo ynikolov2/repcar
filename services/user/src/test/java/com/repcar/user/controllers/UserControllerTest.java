@@ -69,8 +69,8 @@ import com.repcar.user.assembler.UserAssembler;
 import com.repcar.user.beans.User;
 import com.repcar.user.config.UnitTestContext;
 import com.repcar.user.controllers.UserController;
+import com.repcar.user.dao.UserDAO;
 import com.repcar.user.encryption.EncryptDecryptService;
-import com.repcar.user.repositories.UserDAO;
 import com.repcar.user.resources.UserResource;
 
 /**

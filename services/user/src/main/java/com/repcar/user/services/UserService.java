@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.repcar.user.beans.User;
-import com.repcar.user.repositories.UserDAO;
+import com.repcar.user.dao.UserDAO;
 
 @Service
 @Qualifier("userService")

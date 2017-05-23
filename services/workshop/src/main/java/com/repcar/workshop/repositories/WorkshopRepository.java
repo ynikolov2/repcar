@@ -10,16 +10,17 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.repcar.workshop.beans.User;
+import com.repcar.workshop.beans.Workshop;
 
 /**
- * Home object for domain model class User.
+ * Home object for domain model class Workshop.
  *
  */
 @Repository
 @Transactional
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface WorkshopRepository extends JpaRepository<Workshop, Long> {
 
-    User findByUserName(String userName);
+	Workshop findByWorkshopName(String workshopName);
 
-    Page<User> findByWorkshopId(Long workshopId, Pageable pageable);
+    Page<Workshop> findByWorkshopId(Long workshopId, Pageable pageable);
 }
